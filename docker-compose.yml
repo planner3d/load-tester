@@ -4,9 +4,9 @@ services:
     build: frontend
     ports:
       - "8085:80"
-  #   depends_on:
-  #     - server
-  # server:
-  #   build: backend
-  #   ports:
-  #     - "8084:8080"
+    depends_on:
+      - server
+  server:
+    build: backend
+    ports:
+      - "8084:8080"
