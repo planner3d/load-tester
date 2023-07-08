@@ -6,6 +6,7 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
+ENV MIRROR https://archive.apache.org/dist/jmeter/binaries
 RUN apk add --update jmeter
 COPY src ./src
 
