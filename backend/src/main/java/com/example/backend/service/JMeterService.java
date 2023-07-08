@@ -85,7 +85,7 @@ public class JMeterService {
                 TestPlan testPlan = new TestPlan("Create JMeter Script From Java Code");
                 testPlan.setProperty(TestElement.TEST_CLASS, TestPlan.class.getName());
                 testPlan.setProperty(TestElement.GUI_CLASS, TestPlanGui.class.getName());
-                testPlan.setUserDefinedVariables((Arguments) new ArgumentsPanel().createTestElement());
+               // testPlan.setUserDefinedVariables((Arguments) new ArgumentsPanel().createTestElement());
 
                 // Construct Test Plan from previously initialized elements
                 testPlanTree.add(testPlan);
