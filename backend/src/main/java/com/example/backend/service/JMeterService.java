@@ -33,11 +33,11 @@ import org.springframework.stereotype.Service;
 public class JMeterService {
 	
 	public String getLogs(int count, String url) throws FileNotFoundException, IOException {
-		String jmeterHome1 = "C:\\apache-jmeter-5.6";
+		String jmeterHome1 = "/usr/share/jmeter";//"C:\\apache-jmeter-5.6";
         File jmeterHome=new File(jmeterHome1);
-//      JMeterUtils.setJMeterHome(jmeterHome);
+       // JMeterUtils.setJMeterHome(jmeterHome);
         String slash = System.getProperty("file.separator");
-        String logFile = jmeterHome + slash + "output_example_10_threads" + count + ".jtl";
+        String logFile = jmeterHome1 + slash + "output_example_10_threads" + count + ".jtl";
         if (jmeterHome.exists()) {
             File jmeterProperties = new File(jmeterHome.getPath() + slash + "bin" + slash + "jmeter.properties");
             if (jmeterProperties.exists()) {

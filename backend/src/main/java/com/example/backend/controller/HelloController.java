@@ -32,7 +32,7 @@ public class HelloController {
 	
 	@GetMapping("/load_test")
 	public String getTest(@RequestParam String url) throws FileNotFoundException, IOException {
-		return jMeterService.getLogs(0, url);
+		return jMeterService.getLogs(count++, url);
 	}
 
 }
