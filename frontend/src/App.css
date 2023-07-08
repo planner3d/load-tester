@@ -29,6 +29,10 @@ html, body, #root {
     fill: yellowgreen;
 }
 
+.load-tester__header-loading {
+    color: #f9f9f9;
+}
+
 .container {
     height: 100%;
     width: 75%;

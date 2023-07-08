@@ -3,9 +3,12 @@ import React, {useState} from 'react';
 const Header = ({setTestResult}) => {
 
     const [testUrl, setTestUrl] = useState("");
+    const [loading, setLoading] = useState(false);
     const runTest = async () => {
+        setLoading(true);
         const response = await fetch(`https://backend.1531423-carruners.twc1.net/load_test?url=${testUrl}`);
         const result = await response.text();
+        setLoading(false);
         setTestResult(result);
     }
 
@@ -21,6 +24,7 @@ const Header = ({setTestResult}) => {
                     />
                 </svg>
                 <input type="text" onChange={e => setTestUrl(e.target.value)}/>
+                {loading && <span className="load-tester__header-loading">Loading...</span>}
             </section>
         </header>
     );

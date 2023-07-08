@@ -1,5 +1,5 @@
 import Header from "./Header.tsx";
-import React, {useState} from "react";
+import {useState} from "react";
 import Display from "./Display.tsx";
 
 function App() {
