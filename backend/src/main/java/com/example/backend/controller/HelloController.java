@@ -1,19 +1,28 @@
 package com.example.backend.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.service.JMeterService;
 import com.example.backend.service.PlannerObjectService;
 
 @RestController
 public class HelloController {
 
-	private final PlannerObjectService plannerObjectService;
+	//private final PlannerObjectService plannerObjectService;
 	
-	public HelloController(PlannerObjectService plannerObjectService) {
-		this.plannerObjectService = plannerObjectService;
+	private final JMeterService jMeterService;
+	
+	private static int count = 0;
+	
+	public HelloController(JMeterService jMeterService) {
+		this.jMeterService = jMeterService;
 	}
 	
 	@GetMapping("/hello")
@@ -21,9 +30,9 @@ public class HelloController {
 		return "hello, world!";
 	}
 	
-	@GetMapping("/catalog")
-	public ResponseEntity<?> getCatalogObjects() {
-		return ResponseEntity.ok(plannerObjectService.getAll());
+	@GetMapping("/load_test")
+	public String getTest(@RequestParam String url) throws FileNotFoundException, IOException {
+		return jMeterService.getLogs(0, url);
 	}
 
 }
