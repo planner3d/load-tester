@@ -1,11 +1,13 @@
 package com.example.backend.controller;
 
+import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,13 @@ public class HelloController {
 	
 	public HelloController(JMeterService jMeterService) {
 		this.jMeterService = jMeterService;
+	}
+	
+	@GetMapping("/file")
+	public void createFile() throws IOException {
+		FileOutputStream sw = new FileOutputStream("/usr/share/jmeter/test.log");
+		sw.write(12);
+		sw.close();
 	}
 	
 	@GetMapping("/hello")
