@@ -123,10 +123,10 @@ public class JMeterService {
             
             
         }
-        result = "";
-        Files.readAllLines(Paths.get(logFile)).forEach(line -> {
+        result = "some string";
+       /* Files.readAllLines(Paths.get(logFile)).forEach(line -> {
         	result += line;
-        });
+        });*/
         return result;
 	}
 	
