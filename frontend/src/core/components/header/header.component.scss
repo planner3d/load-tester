@@ -1,0 +1,5 @@
+@use 'layout/header';
+
+.header {
+  @include header.header
+}
