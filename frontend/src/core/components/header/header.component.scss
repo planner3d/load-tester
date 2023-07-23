@@ -1,5 +1,10 @@
 @use 'layout/header';
+@use 'layout/container';
 
 .header {
   @include header.header
+}
+
+.header__container {
+  @include container.container;
 }

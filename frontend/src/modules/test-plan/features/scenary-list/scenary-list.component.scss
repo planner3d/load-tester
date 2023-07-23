@@ -1,0 +1,12 @@
+.scenery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scenery-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625em;
+}

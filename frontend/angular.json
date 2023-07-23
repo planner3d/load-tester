@@ -8,13 +8,28 @@
       "schematics": {
         "@schematics/angular:component": {
           "standalone": true,
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
         },
         "@schematics/angular:directive": {
-          "standalone": true
+          "standalone": true,
+          "skipTests": true
         },
         "@schematics/angular:pipe": {
-          "standalone": true
+          "standalone": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "",
@@ -36,7 +51,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/main.scss"
+              "src/styles/main.scss",
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

@@ -1,3 +1,6 @@
+@use 'abstract/colors';
+
 @mixin header {
-  background: yellow;
+  padding: 1em 0;
+  background: colors.$primary-color;
 }
