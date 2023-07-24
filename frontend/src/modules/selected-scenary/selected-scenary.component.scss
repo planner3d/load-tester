@@ -1,5 +1,6 @@
 @use 'abstract/colors';
 @use 'layout/container';
+@use 'layout/header';
 
 :host {
   flex: 4;
@@ -18,8 +19,8 @@
 }
 
 .scenery__header {
-  padding: 1.1875em 0;
-  background-color: colors.$primary-color;
+  @include header.header;
+  font-weight: 600;
 }
 
 .scenery__body {

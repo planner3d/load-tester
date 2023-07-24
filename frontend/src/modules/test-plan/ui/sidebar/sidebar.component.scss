@@ -1,4 +1,5 @@
 @use 'abstract/colors';
+@use 'layout/header';
 
 :host {
   flex: 1;
@@ -6,6 +7,7 @@
 
 .sidebar {
   border-radius: 0 20px 20px  20px / 0 20px 20px 20px;
+  overflow: hidden;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -13,8 +15,8 @@
 }
 
 .sidebar__header {
-  font-weight: 600;
-  padding: 1.5em 0;
+  @include header.header;
+  background-color: colors.$primary-color-body;
   text-align: center;
 }
 
