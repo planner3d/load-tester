@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-header',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class RegisterComponent {
+export class HeaderComponent {
 
 }

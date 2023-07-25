@@ -1,15 +1,13 @@
 import {Routes} from "@angular/router";
+import {TestPlanComponent} from "../modules/test-plan/test-plan.component";
 export const APP_ROUTES: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'auth'
+        redirectTo: 'test-plan'
     },
     {
-        path: 'auth',
-        loadComponent: () => import('../auth/auth.component')
-            .then(mod => mod.AuthComponent),
-        loadChildren: () => import('../auth/auth-routing')
-            .then(mod => mod.AUTH_ROUTES)
+        path: 'test-plan',
+        loadComponent: () => import('../modules/test-plan/test-plan.component').then(mod => mod.TestPlanComponent)
     }
 ]

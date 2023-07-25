@@ -1,0 +1,26 @@
+@use 'abstract/colors';
+@use 'layout/header';
+
+:host {
+  flex: 1;
+}
+
+.sidebar {
+  border-radius: 0 20px 20px  20px / 0 20px 20px 20px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: colors.$primary-color-body;
+}
+
+.sidebar__header {
+  @include header.header;
+  background-color: colors.$primary-color-body;
+  text-align: center;
+}
+
+.sidebar__body {
+  flex: 1;
+}
+

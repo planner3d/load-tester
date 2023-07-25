@@ -1,0 +1,9 @@
+@mixin app-container {
+  width: 95%;
+  margin: 0 auto;
+}
+
+@mixin feature-container {
+  width: 85%;
+  margin: 0 auto;
+}
