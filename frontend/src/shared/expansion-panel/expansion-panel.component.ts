@@ -10,5 +10,5 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansionPanelComponent {
-
+  protected bodyExpanded = false;
 }

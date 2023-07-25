@@ -10,12 +10,11 @@
   border-radius: 5px;
   overflow: hidden;
   display: flex;
-  height: 500px;
 }
 
 .expansion-panel__left-panel {
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
 }
 
 .expansion-panel__divider {
@@ -38,6 +37,16 @@
   background-color: lightcoral;
   display: flex;
   gap: 2rem;
+}
+
+.expansion-panel__expand-icon {
+  width: 24px;
+  height: 24px;
+  fill: black;
+}
+
+.expansion-panel__expand-icon--expanded {
+  transform: rotateZ(90deg);
 }
 
 .expansion-panel__content-header-text {
