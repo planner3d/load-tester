@@ -16,6 +16,9 @@
 
 .container {
   @include container.feature-container;
+  display: flex;
+  flex-direction: column;
+  gap: 2.625rem;
 }
 
 .scenery__header {

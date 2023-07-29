@@ -6,7 +6,9 @@
     </header>
     <main class="scenery__body">
         <div class="container">
-            <app-expansion-panel></app-expansion-panel>
+            <app-expansion-panel *ngFor="let sampler of selectedScenery['samplerList']">
+                <app-http-header [header]="sampler.httpHeader" headerText></app-http-header>
+            </app-expansion-panel>
         </div>
     </main>
 </div>
