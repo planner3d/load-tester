@@ -1,0 +1,39 @@
+<div class="expansion-panel">
+    <div class="expansion-panel__left-panel">
+        <div class="container">
+            <ng-content select="[expansionPanelLeftSide]"></ng-content>
+        </div>
+    </div>
+    <div class="expansion-panel__divider"></div>
+    <div class="expansion-panel__content">
+        <div class="container expansion-panel__content-container">
+            <div class="expansion-panel__content-header">
+                <div class="expansion-panel__expansion-icons">
+                    <svg
+                            *ngIf="!bodyExpanded"
+                            (click)="bodyExpanded = true"
+                            class="expansion-panel__expand-icon expansion-panel__expand-icon--collapsed"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                    >
+                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                    </svg>
+                    <svg
+                            *ngIf="bodyExpanded"
+                            (click)="bodyExpanded = false"
+                            class="expansion-panel__expand-icon expansion-panel__expand-icon--expanded"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                    >
+                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                    </svg>
+                </div>
+                <ng-content select="[expansionPanelHeader]"></ng-content>
+            </div>
+            <div
+                *ngIf="bodyExpanded"
+                class="expansion-panel__content-body"
+            >
+                <ng-content select="[expansionPanelBody]"></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

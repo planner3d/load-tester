@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ScenaryListComponent} from "../test-plan/features/scenary-list/scenary-list.component";
+import {SceneryListComponent} from "../test-plan/features/scenery-list/scenery-list.component";
 
 @Component({
-  selector: 'app-selected-scenary',
+  selector: 'app-selected-scenery',
   standalone: true,
-    imports: [CommonModule, ScenaryListComponent],
-  templateUrl: './selected-scenary.component.html',
-  styleUrls: ['./selected-scenary.component.scss']
+    imports: [CommonModule, SceneryListComponent],
+  templateUrl: './selected-scenery.component.html',
+  styleUrls: ['./selected-scenery.component.scss']
 })
-export class SelectedScenaryComponent {
+export class SelectedSceneryComponent {
 
 }
