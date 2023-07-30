@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {HttpHeader} from "../../selected-scenery.component";
+import {HttpHeader} from "../../types/http-sampler";
 
 @Component({
   selector: 'app-http-header',

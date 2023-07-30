@@ -5,22 +5,7 @@ import {SceneryListComponent} from "../test-plan/features/scenery-list/scenery-l
 import {HttpHeaderComponent} from "./ui/http-header/http-header.component";
 import {HttpBodyComponent} from "./features/http-body/http-body.component";
 import {AccordionModule} from "primeng/accordion";
-
-export interface HttpSamplerRequest {
-  method: string;
-  url: string;
-}
-
-export interface HttpHeader {
-  domain: string;
-  method: string;
-  endpoint: string;
-}
-
-export interface HttpSampler {
-  httpHeader: HttpHeader;
-  requestBody?: HttpSamplerRequest;
-}
+import {HttpSampler} from "./types/http-sampler";
 
 export interface SelectedScenery {
   sceneryHeader: string;
