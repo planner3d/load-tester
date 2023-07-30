@@ -34,6 +34,7 @@
 }
 
 .scenery__body {
+  overflow: auto;
   flex: 1;
   padding: 2.5em 0;
   background-color: colors.$primary-color-body;

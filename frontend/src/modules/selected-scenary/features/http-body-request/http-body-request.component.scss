@@ -7,9 +7,12 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0.5em 0 0 0;
   margin-top: 1.5rem;
+}
+
+.request__section + .request__section {
   border-top: 1px solid black;
+  padding: 0.5em 0 0 0;
 }
 
 .request__endpoint-fields {
@@ -17,4 +20,5 @@
   display: flex;
   gap: 1.25rem;
   padding: 0;
+  margin: 0;
 }
