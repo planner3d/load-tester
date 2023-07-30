@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {HeaderComponent} from "../../core/components/header/header.component";
 import {SidebarComponent} from "./ui/sidebar/sidebar.component";
 import {SceneryListComponent} from "./features/scenery-list/scenery-list.component";
-import {SelectedSceneryComponent} from "../selected-scenary/selected-scenery.component";
+import {SelectedSceneryComponent} from "../selected-scenery/selected-scenery.component";
 
 @Component({
   selector: 'app-test-plan',
