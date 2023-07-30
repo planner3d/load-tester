@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {HeaderComponent} from "../../core/components/header/header.component";
 import {SidebarComponent} from "./ui/sidebar/sidebar.component";
 import {SceneryListComponent} from "./features/scenery-list/scenery-list.component";
