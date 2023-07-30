@@ -6,9 +6,18 @@
     </header>
     <main class="scenery__body">
         <div class="container">
-            <app-expansion-panel *ngFor="let sampler of selectedScenery['samplerList']">
-                <app-http-header [header]="sampler.httpHeader" headerText></app-http-header>
-            </app-expansion-panel>
+            <p-accordion styleClass="scenery__elements">
+                <p-accordionTab
+                        *ngFor="let sampler of selectedScenery['samplerList']"
+                >
+                    <ng-template pTemplate="header">
+                        <app-http-header [header]="sampler.httpHeader"></app-http-header>
+                    </ng-template>
+                    <ng-template pTemplate="content">
+                        <app-http-body></app-http-body>
+                    </ng-template>
+                </p-accordionTab>
+            </p-accordion>
         </div>
     </main>
 </div>

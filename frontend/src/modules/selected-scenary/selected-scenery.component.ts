@@ -2,7 +2,9 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ExpansionPanelComponent} from "../../shared/expansion-panel/expansion-panel.component";
 import {SceneryListComponent} from "../test-plan/features/scenery-list/scenery-list.component";
-import {HttpHeaderComponent} from "./features/http-header/http-header.component";
+import {HttpHeaderComponent} from "./ui/http-header/http-header.component";
+import {HttpBodyComponent} from "./features/http-body/http-body.component";
+import {AccordionModule} from "primeng/accordion";
 
 export interface HttpSamplerRequest {
   method: string;
@@ -28,7 +30,7 @@ export interface SelectedScenery {
 @Component({
   selector: 'app-selected-scenery',
   standalone: true,
-  imports: [CommonModule, SceneryListComponent, ExpansionPanelComponent, HttpHeaderComponent],
+  imports: [CommonModule, SceneryListComponent, ExpansionPanelComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule],
   templateUrl: './selected-scenery.component.html',
   styleUrls: ['./selected-scenery.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

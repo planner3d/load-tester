@@ -16,6 +16,9 @@
 
 .container {
   @include container.feature-container;
+}
+
+:host ::ng-deep .scenery__elements {
   display: flex;
   flex-direction: column;
   gap: 2.625rem;
@@ -24,6 +27,10 @@
 .scenery__header {
   @include header.header;
   font-weight: 600;
+}
+
+.scenery__http-left-panel {
+  font-size: 2.5rem;
 }
 
 .scenery__body {
