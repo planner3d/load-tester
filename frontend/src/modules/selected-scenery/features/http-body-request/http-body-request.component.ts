@@ -62,18 +62,16 @@ export class HttpBodyRequestComponent implements OnInit {
     this.httpSamplerRequestForm.valueChanges
         .subscribe(httpSamplerChanges => {
           if (!this.httpSampler) return;
-          const editedHttpSamplers = this.editedSamplersDataService.editedHttpSamplers$.getValue();
-          this.editedSamplersDataService.editedHttpSamplers$.next({
-            ...editedHttpSamplers,
+          this.editedSamplersDataService.patchEditedHttpSamplers({
             [this.httpSampler.guid]: {
               guid: this.httpSampler.guid,
               method: httpSamplerChanges.method,
               domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
-              endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
+              endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/') + 1),
             }
-          });
+          })
           console.log(this.editedSamplersDataService.editedHttpSamplers$.getValue())
-        });
+      });
   }
 
 }
