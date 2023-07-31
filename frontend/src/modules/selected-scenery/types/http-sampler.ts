@@ -6,7 +6,8 @@ export enum HTTP_METHODS {
 }
 
 export interface HttpSampler {
-    domain: string;
-    method: HTTP_METHODS;
-    endpoint: string;
+    guid: string,
+    domain?: string | null;
+    method?: HTTP_METHODS | null;
+    endpoint?: string | null;
 }

@@ -4,6 +4,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {ChipsModule} from "primeng/chips";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_METHODS, HttpSampler} from "../../types/http-sampler";
+import {EditedSamplersDataService} from "../../data-access/edited-samplers.data.service";
 
 export interface HttpSamplerRequestForm {
   method: FormControl<HTTP_METHODS | null>;
@@ -47,6 +48,10 @@ export class HttpBodyRequestComponent implements OnInit {
     },
   ];
 
+  constructor(private editedSamplersDataService: EditedSamplersDataService) {
+
+  }
+
   public ngOnInit(): void {
     if (!this.httpSampler || !this.httpSampler.domain || !this.httpSampler.endpoint) return;
     this.httpSamplerRequestForm.setValue({
@@ -55,7 +60,19 @@ export class HttpBodyRequestComponent implements OnInit {
     });
 
     this.httpSamplerRequestForm.valueChanges
-        .subscribe(httpSamplerChanges => console.log(httpSamplerChanges));
+        .subscribe(httpSamplerChanges => {
+          const editedHttpSamplers = this.editedSamplersDataService.editedSamplers$.getValue();
+          this.editedSamplersDataService.editedSamplers$.next({
+            ...editedHttpSamplers,
+            [this.httpSampler?.guid!]: {
+              guid: this.httpSampler?.guid ?? '',
+              method: httpSamplerChanges.method,
+              domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
+              endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
+            }
+          });
+          console.log(this.editedSamplersDataService.editedSamplers$.getValue())
+        });
   }
 
 }
