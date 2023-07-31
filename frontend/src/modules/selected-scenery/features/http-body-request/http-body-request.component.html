@@ -1,14 +1,18 @@
-<form class="request">
+<form [formGroup]="httpSamplerRequestForm" class="request">
     <section class="request__section request__endpoint">
         <h5 class="request__endpoint-header">Endpoint</h5>
         <fieldset class="request__endpoint-fields">
-            <p-dropdown></p-dropdown>
-            <input pInputText placeholder="URL" />
+            <p-dropdown
+                    formControlName="method"
+                    [options]="httpMethods"
+                    optionValue="name"
+                    optionLabel="name"
+            ></p-dropdown>
+            <input formControlName="url" pInputText placeholder="URL" />
         </fieldset>
     </section>
 
     <section class="request__section request__endpoint">
         <h5 class="request__endpoint-header">Headers</h5>
     </section>
-
 </form>

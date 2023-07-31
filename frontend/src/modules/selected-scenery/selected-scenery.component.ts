@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {SceneryListComponent} from "../test-plan/features/scenery-list/scenery-list.component";
 import {HttpHeaderComponent} from "./ui/http-header/http-header.component";
 import {HttpBodyComponent} from "./features/http-body/http-body.component";
 import {AccordionModule} from "primeng/accordion";
-import {HttpSampler} from "./types/http-sampler";
+import {HTTP_METHODS, HttpSampler} from "./types/http-sampler";
 
 export interface SelectedScenery {
   sceneryHeader: string;
@@ -24,32 +24,24 @@ export class SelectedSceneryComponent {
     sceneryHeader: 'Тестовый сценарий 1',
     samplerList: [
       {
-        httpHeader: {
-          domain: 'www.google.com',
-          method: 'GET',
-          endpoint: '/'
-        },
+        domain: 'www.google.com',
+        method: HTTP_METHODS.Get,
+        endpoint: '/',
       },
       {
-        httpHeader: {
-          domain: 'www.yandex.ru',
-          method: 'POST',
-          endpoint: '/api/music'
-        },
+        domain: 'www.yandex.ru',
+        method: HTTP_METHODS.Post,
+        endpoint: '/api/music'
       },
       {
-        httpHeader: {
-          domain: 'www.amazon.com',
-          method: 'PUT',
-          endpoint: '/remove'
-        },
+        domain: 'www.amazon.com',
+        method: HTTP_METHODS.Put,
+        endpoint: '/remove'
       },
       {
-        httpHeader: {
-          domain: 'www.kahoot.com',
-          method: 'GET',
-          endpoint: '/'
-        },
+        domain: 'www.kahoot.com',
+        method: HTTP_METHODS.Get,
+        endpoint: '/'
       }
     ],
   }
