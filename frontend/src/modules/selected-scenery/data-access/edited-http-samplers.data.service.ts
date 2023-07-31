@@ -7,9 +7,9 @@ export interface EditedHttpSamplers {
 }
 
 @Injectable()
-export class EditedSamplersDataService {
+export class EditedHttpSamplersDataService {
 
-  public editedSamplers$ = new BehaviorSubject<Partial<EditedHttpSamplers>>({});
+  public editedHttpSamplers$ = new BehaviorSubject<Partial<EditedHttpSamplers>>({});
 
   constructor() { }
 }

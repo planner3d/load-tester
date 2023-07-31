@@ -4,7 +4,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {ChipsModule} from "primeng/chips";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_METHODS, HttpSampler} from "../../types/http-sampler";
-import {EditedSamplersDataService} from "../../data-access/edited-samplers.data.service";
+import {EditedHttpSamplersDataService} from "../../data-access/edited-http-samplers.data.service";
 
 export interface HttpSamplerRequestForm {
   method: FormControl<HTTP_METHODS | null>;
@@ -48,30 +48,31 @@ export class HttpBodyRequestComponent implements OnInit {
     },
   ];
 
-  constructor(private editedSamplersDataService: EditedSamplersDataService) {
+  constructor(private editedSamplersDataService: EditedHttpSamplersDataService) {
 
   }
 
   public ngOnInit(): void {
     if (!this.httpSampler || !this.httpSampler.domain || !this.httpSampler.endpoint) return;
     this.httpSamplerRequestForm.setValue({
-      method: this.httpSampler?.method ?? null,
-      url: this.httpSampler?.domain + this.httpSampler?.endpoint ?? null,
+      method: this.httpSampler.method ?? null,
+      url: this.httpSampler.domain + this.httpSampler.endpoint ?? null,
     });
 
     this.httpSamplerRequestForm.valueChanges
         .subscribe(httpSamplerChanges => {
-          const editedHttpSamplers = this.editedSamplersDataService.editedSamplers$.getValue();
-          this.editedSamplersDataService.editedSamplers$.next({
+          if (!this.httpSampler) return;
+          const editedHttpSamplers = this.editedSamplersDataService.editedHttpSamplers$.getValue();
+          this.editedSamplersDataService.editedHttpSamplers$.next({
             ...editedHttpSamplers,
-            [this.httpSampler?.guid!]: {
-              guid: this.httpSampler?.guid ?? '',
+            [this.httpSampler.guid]: {
+              guid: this.httpSampler.guid,
               method: httpSamplerChanges.method,
               domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
               endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
             }
           });
-          console.log(this.editedSamplersDataService.editedSamplers$.getValue())
+          console.log(this.editedSamplersDataService.editedHttpSamplers$.getValue())
         });
   }
 

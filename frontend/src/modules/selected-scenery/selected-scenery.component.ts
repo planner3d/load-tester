@@ -5,7 +5,7 @@ import {HttpHeaderComponent} from "./ui/http-header/http-header.component";
 import {HttpBodyComponent} from "./features/http-body/http-body.component";
 import {AccordionModule} from "primeng/accordion";
 import {HTTP_METHODS, HttpSampler} from "./types/http-sampler";
-import {EditedSamplersDataService} from "./data-access/edited-samplers.data.service";
+import {EditedHttpSamplersDataService} from "./data-access/edited-http-samplers.data.service";
 
 export interface SelectedScenery {
   sceneryHeader: string;
@@ -17,7 +17,7 @@ export interface SelectedScenery {
   standalone: true,
   imports: [CommonModule, SceneryListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule],
   providers: [
-      EditedSamplersDataService
+      EditedHttpSamplersDataService
   ],
   templateUrl: './selected-scenery.component.html',
   styleUrls: ['./selected-scenery.component.scss'],
