@@ -11,10 +11,10 @@
                         *ngFor="let sampler of selectedScenery['samplerList']"
                 >
                     <ng-template pTemplate="header">
-                        <app-http-header [header]="sampler.httpHeader"></app-http-header>
+                        <app-http-header [httpSampler]="sampler"></app-http-header>
                     </ng-template>
                     <ng-template pTemplate="content">
-                        <app-http-body></app-http-body>
+                        <app-http-body [httpSampler]="sampler"></app-http-body>
                     </ng-template>
                 </p-accordionTab>
             </p-accordion>

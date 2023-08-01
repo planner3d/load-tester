@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ButtonModule} from "primeng/button";
 import {TabViewModule} from "primeng/tabview";
 import {HttpBodyRequestComponent} from "../http-body-request/http-body-request.component";
+import {HttpSampler} from "../../types/http-sampler";
 
 @Component({
   selector: 'app-http-body',
@@ -14,4 +15,6 @@ import {HttpBodyRequestComponent} from "../http-body-request/http-body-request.c
 })
 export class HttpBodyComponent {
 
+  @Input()
+  public httpSampler?: HttpSampler;
 }

@@ -1,15 +1,13 @@
-export interface HttpSamplerRequest {
-    method: string;
-    url: string;
-}
-
-export interface HttpHeader {
-    domain: string;
-    method: string;
-    endpoint: string;
+export enum HTTP_METHODS {
+    Post = 'POST',
+    Get = 'GET',
+    Put = 'PUT',
+    Patch = 'PATCH'
 }
 
 export interface HttpSampler {
-    httpHeader: HttpHeader;
-    requestBody?: HttpSamplerRequest;
+    guid: string,
+    domain?: string | null;
+    method?: HTTP_METHODS | null;
+    endpoint?: string | null;
 }

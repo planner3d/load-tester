@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {SceneryListComponent} from "../test-plan/features/scenery-list/scenery-list.component";
 import {HttpHeaderComponent} from "./ui/http-header/http-header.component";
 import {HttpBodyComponent} from "./features/http-body/http-body.component";
 import {AccordionModule} from "primeng/accordion";
-import {HttpSampler} from "./types/http-sampler";
+import {HTTP_METHODS, HttpSampler} from "./types/http-sampler";
+import {EditedHttpSamplersDataService} from "./data-access/edited-http-samplers.data.service";
 
 export interface SelectedScenery {
   sceneryHeader: string;
@@ -15,6 +16,9 @@ export interface SelectedScenery {
   selector: 'app-selected-scenery',
   standalone: true,
   imports: [CommonModule, SceneryListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule],
+  providers: [
+      EditedHttpSamplersDataService
+  ],
   templateUrl: './selected-scenery.component.html',
   styleUrls: ['./selected-scenery.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,32 +28,28 @@ export class SelectedSceneryComponent {
     sceneryHeader: 'Тестовый сценарий 1',
     samplerList: [
       {
-        httpHeader: {
-          domain: 'www.google.com',
-          method: 'GET',
-          endpoint: '/'
-        },
+        guid: '5454kfdjsdssd',
+        domain: 'www.google.com',
+        method: HTTP_METHODS.Get,
+        endpoint: '/',
       },
       {
-        httpHeader: {
-          domain: 'www.yandex.ru',
-          method: 'POST',
-          endpoint: '/api/music'
-        },
+        guid: 'dsd43454dsds',
+        domain: 'www.yandex.ru',
+        method: HTTP_METHODS.Post,
+        endpoint: '/api/music'
       },
       {
-        httpHeader: {
-          domain: 'www.amazon.com',
-          method: 'PUT',
-          endpoint: '/remove'
-        },
+        guid: 'rfdf44534343',
+        domain: 'www.amazon.com',
+        method: HTTP_METHODS.Put,
+        endpoint: '/remove'
       },
       {
-        httpHeader: {
-          domain: 'www.kahoot.com',
-          method: 'GET',
-          endpoint: '/'
-        },
+        guid: 'dsdsdxhy6666674',
+        domain: 'www.kahoot.com',
+        method: HTTP_METHODS.Get,
+        endpoint: '/'
       }
     ],
   }
