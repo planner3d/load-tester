@@ -1,4 +1,4 @@
-<div class="scenery">
+<div *ngIf="selectedSceneryDataService.selectedScenery$ | async as selectedScenery" class="scenery">
     <header class="scenery__header">
         <div class="container">
             Тестовый сценарий 1

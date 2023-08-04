@@ -67,7 +67,7 @@ export class HttpBodyRequestComponent implements OnInit {
               guid: this.httpSampler.guid,
               method: httpSamplerChanges.method,
               domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
-              endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/') + 1),
+              endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
             }
           })
           console.log(this.editedSamplersDataService.editedHttpSamplers$.getValue())
