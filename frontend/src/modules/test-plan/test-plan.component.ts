@@ -6,9 +6,7 @@ import {SceneryListComponent} from "./features/scenery-list/scenery-list.compone
 import {SelectedSceneryComponent} from "../selected-scenery/selected-scenery.component";
 import {SceneryListDataService} from "./data-access/scenery-list.data.service";
 import {TestPlanApiService} from "./api/test-plan.api.service";
-import {ActivatedRoute, ChildActivationEnd, Router, RouterLink, RouterOutlet} from "@angular/router";
-import {filter, take} from "rxjs";
-import {logMessages} from "@angular-devkit/build-angular/src/tools/esbuild/utils";
+import {RouterLink, RouterOutlet} from "@angular/router";
 import {ErrorComponent} from "../../core/components/error/error.component";
 
 @Component({
@@ -24,14 +22,5 @@ import {ErrorComponent} from "../../core/components/error/error.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestPlanComponent {
-    constructor(
-        protected activatedRoute: ActivatedRoute,
-        protected sceneryListDataService: SceneryListDataService,
-    ) {
-    }
-
-    public ngOnInit(): void {
-
-    }
 
 }

@@ -5,6 +5,7 @@ import {ChipsModule} from "primeng/chips";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_METHODS, HttpSampler} from "../../types/http-sampler";
 import {EditedHttpSamplersDataService} from "../../data-access/edited-http-samplers.data.service";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
 export interface HttpSamplerRequestForm {
   method: FormControl<HTTP_METHODS | null>;
@@ -15,6 +16,7 @@ export interface HttpMethodOption {
   name: HTTP_METHODS;
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-http-body-request',
   standalone: true,
@@ -60,6 +62,9 @@ export class HttpBodyRequestComponent implements OnInit {
     });
 
     this.httpSamplerRequestForm.valueChanges
+        .pipe(
+            untilDestroyed(this),
+        )
         .subscribe(httpSamplerChanges => {
           if (!this.httpSampler) return;
           this.editedSamplersDataService.patchEditedHttpSamplers({

@@ -11,6 +11,9 @@ import {SelectedSceneryApiService} from "./api/selected-scenery.api.service";
 import {switchMap} from "rxjs";
 import {DragDropModule} from "primeng/dragdrop";
 import {ErrorComponent} from "../../core/components/error/error.component";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+
+@UntilDestroy()
 @Component({
   selector: 'app-selected-scenery',
   standalone: true,
@@ -34,6 +37,7 @@ export class SelectedSceneryComponent implements OnInit {
     this.route.params
         .pipe(
             switchMap(params => this.selectedSceneryDataService.loadSelectedScenery(params['id'])),
+            untilDestroyed(this),
         )
         .subscribe(console.log);
   }
