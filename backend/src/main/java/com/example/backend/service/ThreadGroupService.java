@@ -1,5 +1,8 @@
 package com.example.backend.service;
 
-public interface ThreadGroupService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class ThreadGroupService implements LTThread {
 
 }
