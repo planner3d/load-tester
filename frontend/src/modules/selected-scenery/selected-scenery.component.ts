@@ -5,14 +5,16 @@ import {HttpHeaderComponent} from "./ui/http-header/http-header.component";
 import {HttpBodyComponent} from "./features/http-body/http-body.component";
 import {AccordionModule} from "primeng/accordion";
 import {EditedHttpSamplersDataService} from "./data-access/edited-http-samplers.data.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {SelectedSceneryDataService} from "./data-access/selected-scenery.data.service";
 import {SelectedSceneryApiService} from "./api/selected-scenery.api.service";
-import {switchMap, tap} from "rxjs";
+import {switchMap} from "rxjs";
+import {DragDropModule} from "primeng/dragdrop";
+import {ErrorComponent} from "../../core/components/error/error.component";
 @Component({
   selector: 'app-selected-scenery',
   standalone: true,
-  imports: [CommonModule, SceneryListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule],
+    imports: [CommonModule, SceneryListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent],
   providers: [
       EditedHttpSamplersDataService,
       SelectedSceneryDataService,
@@ -31,12 +33,9 @@ export class SelectedSceneryComponent implements OnInit {
   public ngOnInit(): void {
     this.route.params
         .pipe(
-            tap(console.log),
             switchMap(params => this.selectedSceneryDataService.loadSelectedScenery(params['id'])),
         )
-        .subscribe({
-            error: console.log,
-        });
+        .subscribe(console.log);
   }
 
 }

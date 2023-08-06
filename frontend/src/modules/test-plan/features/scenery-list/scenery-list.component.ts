@@ -20,7 +20,8 @@ export class SceneryListComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.sceneryListDataService.setSceneryList();
+    this.sceneryListDataService.getSceneryList()
+        .subscribe();
   }
 
   protected selectScenery(scenery: Scenery) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SelectedScenery} from "../data-access/selected-scenery.data.service";
-import {first, map, Observable, of} from "rxjs";
+import {first, Observable, of} from "rxjs";
 import {HTTP_METHODS} from "../types/http-sampler";
 
 @Injectable()
@@ -100,15 +100,11 @@ export class SelectedSceneryApiService {
   ]
   constructor() { }
 
-  public getSelectedScenery(guid: SelectedScenery['guid']): Observable<SelectedScenery> {
+  public getSelectedScenery(guid: SelectedScenery['guid']): Observable<SelectedScenery | undefined> {
     const selectedScenery = this.serverData.find(scenery => scenery.guid === guid);
     console.log(selectedScenery)
     return of(selectedScenery).pipe(
         first(),
-        map(selectedScenery => {
-          if (selectedScenery) return selectedScenery;
-          else throw new Error('No such scenery');
-        })
     );
   }
 }

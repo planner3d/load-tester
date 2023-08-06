@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, take} from "rxjs";
+import {BehaviorSubject, Observable, shareReplay, tap} from "rxjs";
 import {TestPlanApiService} from "../api/test-plan.api.service";
 
 export interface Scenery {
@@ -10,14 +10,18 @@ export interface Scenery {
 @Injectable()
 export class SceneryListDataService {
 
-  public sceneryList$ = new BehaviorSubject<Scenery[]>([]);
+  private _sceneryList$ = new BehaviorSubject<Scenery[]>([]);
+  public sceneryList$ = this._sceneryList$.asObservable()
+      .pipe(shareReplay());
   constructor(private testPlanApiService: TestPlanApiService) {
 
   }
 
-  public setSceneryList(): void {
-      this.testPlanApiService.getSceneryList()
-          .subscribe(sceneryList => this.sceneryList$.next(sceneryList));
+  public getSceneryList(): Observable<Scenery[]> {
+      return this.testPlanApiService.getSceneryList()
+          .pipe(
+              tap(sceneryList => this._sceneryList$.next(sceneryList))
+          );
   }
 
 

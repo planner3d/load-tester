@@ -16,7 +16,7 @@ export class SelectedSceneryDataService {
   public selectedScenery$ = new BehaviorSubject<SelectedScenery | undefined>(undefined);
   constructor(private selectedSceneryApiService: SelectedSceneryApiService, private router: Router) { }
 
-  public loadSelectedScenery(guid: SelectedScenery['guid']): Observable<SelectedScenery> {
+  public loadSelectedScenery(guid: SelectedScenery['guid']): Observable<SelectedScenery | undefined> {
     return this.selectedSceneryApiService.getSelectedScenery(guid)
         .pipe(
             tap(selectedScenery => this.selectedScenery$.next(selectedScenery))

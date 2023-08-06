@@ -9,11 +9,12 @@ import {TestPlanApiService} from "./api/test-plan.api.service";
 import {ActivatedRoute, ChildActivationEnd, Router, RouterLink, RouterOutlet} from "@angular/router";
 import {filter, take} from "rxjs";
 import {logMessages} from "@angular-devkit/build-angular/src/tools/esbuild/utils";
+import {ErrorComponent} from "../../core/components/error/error.component";
 
 @Component({
   selector: 'app-test-plan',
   standalone: true,
-    imports: [CommonModule, HeaderComponent, SidebarComponent, SceneryListComponent, SelectedSceneryComponent, RouterOutlet, RouterLink],
+    imports: [CommonModule, HeaderComponent, SidebarComponent, SceneryListComponent, SelectedSceneryComponent, RouterOutlet, RouterLink, ErrorComponent],
   providers: [
       SceneryListDataService,
       TestPlanApiService,
@@ -23,7 +24,14 @@ import {logMessages} from "@angular-devkit/build-angular/src/tools/esbuild/utils
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestPlanComponent {
-    constructor(private route: ActivatedRoute, private router: Router) {
+    constructor(
+        protected activatedRoute: ActivatedRoute,
+        protected sceneryListDataService: SceneryListDataService,
+    ) {
+    }
+
+    public ngOnInit(): void {
+
     }
 
 }
