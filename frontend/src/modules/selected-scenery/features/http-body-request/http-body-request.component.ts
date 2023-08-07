@@ -6,6 +6,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_METHODS, HttpSampler} from "../../types/http-sampler";
 import {EditedHttpSamplersDataService} from "../../data-access/edited-http-samplers.data.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {SAMPLER_TYPES} from "../../types/sampler";
 
 
 export interface HttpSamplerRequestForm {
@@ -72,6 +73,7 @@ export class HttpBodyRequestComponent implements OnInit {
             [this.httpSampler.guid]: {
               guid: this.httpSampler.guid,
               method: httpSamplerChanges.method,
+              type: SAMPLER_TYPES.Http,
               domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
               endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
             }

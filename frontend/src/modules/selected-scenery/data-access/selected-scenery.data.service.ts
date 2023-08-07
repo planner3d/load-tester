@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, catchError, Observable, of, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {HttpSampler} from "../types/http-sampler";
 import {SelectedSceneryApiService} from "../api/selected-scenery.api.service";
 import {Router} from "@angular/router";
+import {FtpSampler} from "../types/ftp-sampler";
 
 export interface SelectedScenery {
   guid: string;
   name: string;
-  samplerList: HttpSampler[];
+  samplerList: Array<HttpSampler | FtpSampler>;
 }
 
 @Injectable()
