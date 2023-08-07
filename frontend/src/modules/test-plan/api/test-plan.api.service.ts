@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Scenery} from "../data-access/scenery-list.data.service";
+import {Scenario} from "../data-access/scenario-list.data.service";
 import {first, Observable, of} from "rxjs";
 
 @Injectable()
 export class TestPlanApiService {
 
-  public getSceneryList(): Observable<Scenery[]> {
+  public getScenarioList(): Observable<Scenario[]> {
     return of([
       {
         guid: 'fjdjhf743747dh',

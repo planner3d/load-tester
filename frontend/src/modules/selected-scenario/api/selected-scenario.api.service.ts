@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {SelectedScenery} from "../data-access/selected-scenery.data.service";
+import {SelectedScenario} from "../data-access/selected-scenario.data.service";
 import {first, Observable, of} from "rxjs";
 import {HTTP_METHODS} from "../types/http-sampler";
 import {SAMPLER_TYPES} from "../types/sampler";
 
 @Injectable()
-export class SelectedSceneryApiService {
+export class SelectedScenarioApiService {
 
-  private serverData: SelectedScenery[] = [
+  private serverData: SelectedScenario[] = [
     {
       guid: 'fjdjhf743747dh',
       name: 'Тестовый сценарий 1',
@@ -111,10 +111,10 @@ export class SelectedSceneryApiService {
   ]
   constructor() { }
 
-  public getSelectedScenery(guid: SelectedScenery['guid']): Observable<SelectedScenery | undefined> {
-    const selectedScenery = this.serverData.find(scenery => scenery.guid === guid);
-    console.log(selectedScenery)
-    return of(selectedScenery).pipe(
+  public getSelectedScenario(guid: SelectedScenario['guid']): Observable<SelectedScenario | undefined> {
+    const selectedScenario = this.serverData.find(scenario => scenario.guid === guid);
+    console.log(selectedScenario)
+    return of(selectedScenario).pipe(
         first(),
     );
   }

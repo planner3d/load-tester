@@ -1,14 +1,14 @@
-<div *ngIf="selectedSceneryDataService.selectedScenery$ | async as selectedScenery; else empty" class="scenery">
-    <header class="scenery__header">
+<div *ngIf="selectedScenarioDataService.selectedScenario$ | async as selectedScenario; else empty" class="scenario">
+    <header class="scenario__header">
         <div class="container">
             Тестовый сценарий 1
         </div>
     </header>
-    <main class="scenery__body">
+    <main class="scenario__body">
         <div class="container">
-            <p-accordion styleClass="scenery__elements">
+            <p-accordion styleClass="scenario__elements">
                 <p-accordionTab
-                         *ngFor="let sampler of selectedScenery['samplerList']"
+                         *ngFor="let sampler of selectedScenario['samplerList']"
                 >
                     <ng-template pTemplate="header">
                         <app-http-header [httpSampler]="sampler"></app-http-header>
@@ -23,7 +23,7 @@
 </div>
 
 <ng-template #empty>
-    <div class="scenery-empty">
+    <div class="scenario-empty">
         <app-error
             title="Ошибка отображения сценария"
             description="Выбранного сценария не существует"

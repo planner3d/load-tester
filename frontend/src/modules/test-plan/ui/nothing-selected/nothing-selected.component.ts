@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ErrorComponent} from "../../../../core/components/error/error.component";
-import {SceneryListDataService} from "../../data-access/scenery-list.data.service";
+import {ScenarioListDataService} from "../../data-access/scenario-list.data.service";
 
 @Component({
   selector: 'app-nothing-selected',
@@ -12,6 +12,6 @@ import {SceneryListDataService} from "../../data-access/scenery-list.data.servic
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NothingSelectedComponent {
-  constructor(protected sceneryListDataService: SceneryListDataService) {
+  constructor(protected scenarioListDataService: ScenarioListDataService) {
   }
 }

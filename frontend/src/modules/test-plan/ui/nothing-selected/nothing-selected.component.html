@@ -1,10 +1,10 @@
 <app-error
-    *ngIf="(sceneryListDataService.sceneryList$ | async)?.length"
+    *ngIf="(scenarioListDataService.scenarioList$ | async)?.length"
     title="Сценарий не выбран"
     description="Псс... Выбери чего-нибудь скорее"
 ></app-error>
 <app-error
-        *ngIf="!(sceneryListDataService.sceneryList$ | async)?.length"
+        *ngIf="!(scenarioListDataService.scenarioList$ | async)?.length"
         title="Сценарий не выбран"
         description="Сценариев не нашлось, но можно добавить новый"
 ></app-error>

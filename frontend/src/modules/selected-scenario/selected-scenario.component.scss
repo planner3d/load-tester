@@ -6,7 +6,7 @@
   flex: 4;
 }
 
-.scenery {
+.scenario {
   border-radius: 20px 0 20px  20px / 20px 0 20px 20px;
   overflow: hidden;
   height: 100%;
@@ -18,29 +18,29 @@
   @include container.feature-container;
 }
 
-:host ::ng-deep .scenery__elements {
+:host ::ng-deep .scenario__elements {
   display: flex;
   flex-direction: column;
   gap: 2.625rem;
 }
 
-.scenery__header {
+.scenario__header {
   @include header.header;
   font-weight: 600;
 }
 
-.scenery__http-left-panel {
+.scenario__http-left-panel {
   font-size: 2.5rem;
 }
 
-.scenery__body {
+.scenario__body {
   overflow: auto;
   flex: 1;
   padding: 2.5em 0;
   background-color: colors.$primary-color-body;
 }
 
-.scenery-empty {
+.scenario-empty {
   height: 100%;
   display: flex;
   justify-content: center;

@@ -1,8 +1,8 @@
 import {Routes} from "@angular/router";
 export const TEST_PLAN_ROUTES: Routes = [
     {
-        path: 'selected-scenery/:id',
-        loadComponent: () => import('../selected-scenery/selected-scenery.component').then(mod => mod.SelectedSceneryComponent)
+        path: 'selected-scenario/:id',
+        loadComponent: () => import('../selected-scenario/selected-scenario.component').then(mod => mod.SelectedScenarioComponent)
     },
     {
         path: '**',

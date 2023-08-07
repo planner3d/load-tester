@@ -1,35 +1,35 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Scenery, SceneryListDataService} from "../../data-access/scenery-list.data.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {Scenario, ScenarioListDataService} from "../../data-access/scenario-list.data.service";
 
 @UntilDestroy()
 @Component({
-  selector: 'app-scenery-list',
+  selector: 'app-scenario-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './scenery-list.component.html',
-  styleUrls: ['./scenery-list.component.scss'],
+  templateUrl: './scenario-list.component.html',
+  styleUrls: ['./scenario-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SceneryListComponent implements OnInit {
+export class ScenarioListComponent implements OnInit {
   constructor(
-      protected sceneryListDataService: SceneryListDataService,
+      protected scenarioListDataService: ScenarioListDataService,
       private router: Router,
       private activatedRoute: ActivatedRoute,
       ) {
   }
 
   public ngOnInit() {
-    this.sceneryListDataService.getSceneryList()
+    this.scenarioListDataService.getScenarioList()
         .pipe(
             untilDestroyed(this),
         )
         .subscribe();
   }
 
-  protected selectScenery(scenery: Scenery) {
-    this.router.navigate(['selected-scenery', scenery.guid], {relativeTo: this.activatedRoute})
+  protected selectScenario(scenario: Scenario) {
+    this.router.navigate(['selected-scenario', scenario.guid], {relativeTo: this.activatedRoute})
   }
 }
