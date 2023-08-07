@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 
 export interface SelectedScenery {
   guid: string;
-  sceneryHeader: string;
+  name: string;
   samplerList: HttpSampler[];
 }
 

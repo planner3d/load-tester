@@ -9,7 +9,7 @@ export class SelectedSceneryApiService {
   private serverData: SelectedScenery[] = [
     {
       guid: 'fjdjhf743747dh',
-      sceneryHeader: 'Тестовый сценарий 1',
+      name: 'Тестовый сценарий 1',
       samplerList: [
         {
           guid: '5454kfdjsdssd',
@@ -39,7 +39,7 @@ export class SelectedSceneryApiService {
     },
     {
       guid: '3434fdsddsdh',
-      sceneryHeader: 'Тестовый сценарий 1',
+      name: 'Тестовый сценарий 1',
       samplerList: [
         {
           guid: '5454kfdjsdssd',
@@ -69,7 +69,7 @@ export class SelectedSceneryApiService {
     },
     {
       guid: '9999sjkdjksjdqq',
-      sceneryHeader: 'Тестовый сценарий 1',
+      name: 'Тестовый сценарий 1',
       samplerList: [
         {
           guid: '5454kfdjsdssd',
