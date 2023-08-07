@@ -1,19 +1,18 @@
 @use 'abstract/colors';
 
-.scenery-list {
+.scenario-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.scenery-list-item {
+.scenario-list-item {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
   padding: 0.625em;
 }
 
-.scenery-list-item:hover {
+.scenario-list-item:hover {
   background-color: colors.$primary-color;
   cursor: pointer;
 }

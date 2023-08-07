@@ -1,0 +1,16 @@
+.error {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.error-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.error-icon {
+  width: 50px;
+}
+

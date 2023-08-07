@@ -1,3 +1,5 @@
+import {Sampler} from "./sampler";
+
 export enum HTTP_METHODS {
     Post = 'POST',
     Get = 'GET',
@@ -5,8 +7,7 @@ export enum HTTP_METHODS {
     Patch = 'PATCH'
 }
 
-export interface HttpSampler {
-    guid: string,
+export interface HttpSampler extends Sampler {
     domain?: string | null;
     method?: HTTP_METHODS | null;
     endpoint?: string | null;
