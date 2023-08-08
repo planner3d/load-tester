@@ -1,0 +1,22 @@
+.add-button {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  padding: 0.5em;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: rgba(55, 53, 47, 0.1);
+}
+
+.add-button__icon {
+  color: rgb(55, 53, 47);
+  width: 14px;
+  height: 14px;
+}
+
+.add-button__label {
+  color: rgb(55, 53, 47);
+}
