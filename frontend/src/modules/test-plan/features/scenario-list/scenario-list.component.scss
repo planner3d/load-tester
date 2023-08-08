@@ -1,4 +1,5 @@
 @use 'abstract/colors';
+@use 'abstract/effects';
 
 .scenario-list {
   display: flex;
@@ -10,9 +11,10 @@
   display: flex;
   gap: 0.5rem;
   padding: 0.625em;
+  @include effects.change-bg-hover();
 }
 
 .scenario-list-item:hover {
-  background-color: colors.$primary-color;
+  background-color: colors.$hover-color;
   cursor: pointer;
 }

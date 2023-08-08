@@ -1,22 +1,26 @@
+@use 'abstract/effects';
+@use 'abstract/colors';
+
 .add-button {
   display: flex;
   align-items: center;
   font-size: 0.85rem;
   padding: 0.5em;
   gap: 0.5rem;
-  cursor: pointer;
+  @include effects.change-bg-hover();
 }
 
 .add-button:hover {
-  background-color: rgba(55, 53, 47, 0.1);
+  cursor: pointer;
+  background-color: colors.$hover-color;
 }
 
 .add-button__icon {
-  color: rgb(55, 53, 47);
+  color: colors.$additional-color;
   width: 14px;
   height: 14px;
 }
 
 .add-button__label {
-  color: rgb(55, 53, 47);
+  color: colors.$additional-color;
 }
