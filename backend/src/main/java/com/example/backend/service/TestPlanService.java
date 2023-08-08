@@ -48,7 +48,7 @@ public class TestPlanService implements LTTestPlan {
 					);
 	}
 	
-	protected Map<String, Object> toMap (JsonNode child) {
+	private Map<String, Object> toMap (JsonNode child) {
 		Map<String, Object> childMap = new HashMap<>();
 		child.fields().forEachRemaining(pair -> {
 			if (pair.getValue().isNumber())
