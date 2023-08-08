@@ -113,7 +113,6 @@ export class SelectedScenarioApiService {
 
   public getSelectedScenario(guid: SelectedScenario['guid']): Observable<SelectedScenario | undefined> {
     const selectedScenario = this.serverData.find(scenario => scenario.guid === guid);
-    console.log(selectedScenario)
     return of(selectedScenario).pipe(
         first(),
     );
