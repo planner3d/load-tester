@@ -19,26 +19,31 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TestPlanController {
 	
-	private final LTTestPlan lTTestPlan;
+	private final LTTestPlan testPlan;
 	
 	@PostMapping("/test-plan")
-	public ResponseEntity<?> saveTestPlan(@RequestBody JsonNode testPlan) {
-		return ResponseEntity.ok(lTTestPlan.saveTestPlan(testPlan));
+	public ResponseEntity<?> saveTestPlan(@RequestBody JsonNode testPlanRequest) {
+		return ResponseEntity.ok(testPlan.saveTestPlan(testPlanRequest));
 	}
 	
 	@PostMapping("/test-plan/element")
 	public ResponseEntity<?> saveTestPlanElement(@RequestBody JsonNode testElement) {
-		return ResponseEntity.ok(lTTestPlan.saveTestPlanElement(testElement));
+		return ResponseEntity.ok(testPlan.saveTestPlanElement(testElement));
 	}
 	
 	@GetMapping("/test-plan/element/children")
 	public ResponseEntity<?> findChildrenByParentGuid(@RequestParam String parentGuid) {
-		return ResponseEntity.ok(lTTestPlan.findChildrenByParentGuid(parentGuid));
+		return ResponseEntity.ok(testPlan.findChildrenByParentGuid(parentGuid));
 	}
 	
-	@PutMapping("/test-plan/element")
-	public ResponseEntity<?> updateTestPlanElement(@RequestBody JsonNode testElement) {
-		return ResponseEntity.ok(lTTestPlan.updateTestPlanElement(testElement));
+	@PutMapping("/test-plan/thread-group")
+	public ResponseEntity<?> updateThreadGroup(@RequestBody JsonNode threadGroup) {
+		return ResponseEntity.ok(testPlan.updateThreadGroup(threadGroup));
+	}
+	
+	@PutMapping("/test-plan/elements")
+	public ResponseEntity<?> updateTestPlanElements(@RequestBody JsonNode[] testElements) {
+		return ResponseEntity.ok(testPlan.updateTestPlanElements(testElements));
 	}
 
 }

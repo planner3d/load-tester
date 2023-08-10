@@ -10,6 +10,8 @@ public interface LTTestPlan {
 	
 	Object findChildrenByParentGuid(String parentGuid);
 	
-	Boolean updateTestPlanElement(JsonNode testElement);
+	Boolean updateThreadGroup(JsonNode threadGroup);
+	
+	Boolean updateTestPlanElements(JsonNode[] testElements);
 
 }

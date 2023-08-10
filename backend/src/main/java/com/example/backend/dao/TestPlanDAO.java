@@ -1,11 +1,10 @@
 package com.example.backend.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public interface JsonDAO {
+public interface TestPlanDAO {
 	
 	Boolean saveTestPlan(JsonNode testPlan);
 	
@@ -13,6 +12,6 @@ public interface JsonDAO {
 	
 	List<?> findChildrenByParentGuid(String parentGuid);
 	
-	Boolean updateTestPlanElement(String parentGuid, String guid, Map<String, Object> child);
+	Boolean updateTestPlanElement(String parentGuid, String guid, JsonNode data);
 
 }
