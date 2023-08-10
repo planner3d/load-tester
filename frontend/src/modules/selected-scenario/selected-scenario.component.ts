@@ -39,7 +39,7 @@ export class SelectedScenarioComponent implements OnInit {
             switchMap(params => this.selectedScenarioDataService.loadSelectedScenario(params['id'])),
             untilDestroyed(this),
         )
-        .subscribe(console.log);
+        .subscribe();
   }
 
 }

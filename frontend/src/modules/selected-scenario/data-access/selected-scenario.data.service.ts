@@ -15,7 +15,7 @@ export interface SelectedScenario {
 export class SelectedScenarioDataService {
 
   public selectedScenario$ = new BehaviorSubject<SelectedScenario | undefined>(undefined);
-  constructor(private selectedScenarioApiService: SelectedScenarioApiService, private router: Router) { }
+  constructor(private selectedScenarioApiService: SelectedScenarioApiService) { }
 
   public loadSelectedScenario(guid: SelectedScenario['guid']): Observable<SelectedScenario | undefined> {
     return this.selectedScenarioApiService.getSelectedScenario(guid)
