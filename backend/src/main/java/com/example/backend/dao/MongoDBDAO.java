@@ -32,7 +32,6 @@ public class MongoDBDAO implements TestPlanDAO {
 
 	@Override
 	public Boolean saveTestPlanElement(String parentGuid, JsonNode child) {
-		System.out.println(child);
 		Query query = new Query(Criteria.where(JsonFieldModel.PARENT_GUID).is(parentGuid));
 		Update update = new Update();
 		update.push(JsonFieldModel.CHILDREN, Document.parse(child.toString()));
@@ -41,18 +40,19 @@ public class MongoDBDAO implements TestPlanDAO {
 				.wasAcknowledged();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<?> findChildrenByParentGuid(String parentGuid) {
+	public List<Document> findChildrenByParentGuid(String parentGuid) {
 		Query query = new Query(Criteria
 				.where(JsonFieldModel.PARENT_GUID)
 				.is(parentGuid)
 			);
-		return Objects
+		return (List<Document>)Objects
 				.requireNonNullElse(
 						mongoTemplate.findOne(query, Document.class, DEFAULT_COLLECTION), 
 						new Document()
 				)
-				.get(JsonFieldModel.CHILDREN, List.class);
+				.get(JsonFieldModel.CHILDREN);
 	}
 
 	@Override

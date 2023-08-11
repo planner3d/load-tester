@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -72,6 +73,11 @@ public class TestPlanService implements LTTestPlan {
 	@Override
 	public void deleteDefaultUserCollection() {
 		testPlanDAO.deleteDefaultUserCollection();
+	}
+	
+	public String startTestPlan(Map<String, String> testPlanGuid) {
+		
+		return "";
 	}
 
 }
