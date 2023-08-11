@@ -75,4 +75,9 @@ public class MongoDBDAO implements TestPlanDAO {
 				.wasAcknowledged();
 	}
 
+	@Override
+	public void deleteDefaultUserCollection() {
+		mongoTemplate.dropCollection(DEFAULT_COLLECTION);
+	}
+
 }

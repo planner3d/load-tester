@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,6 +45,12 @@ public class TestPlanController {
 	@PutMapping("/test-plan/elements")
 	public ResponseEntity<?> updateTestPlanElements(@RequestBody JsonNode[] testElements) {
 		return ResponseEntity.ok(testPlan.updateTestPlanElements(testElements));
+	}
+	
+	@DeleteMapping("/collection")
+	public ResponseEntity<?> deleteDefaultUserCollection() {
+		testPlan.deleteDefaultUserCollection();
+		return ResponseEntity.ok().build();
 	}
 
 }
