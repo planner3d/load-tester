@@ -32,7 +32,7 @@ export class ScenarioListComponent implements OnInit {
   }
 
   protected onAddToList(): void {
-     this.scenarioListDataService.addToScenarioList({ guid: uuidv4(), title: 'Тестовый сценарий'})
+     this.scenarioListDataService.addToScenarioList({ guid: uuidv4(), name: 'Тестовый сценарий'})
          .pipe(
              untilDestroyed(this),
          )

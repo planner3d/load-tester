@@ -17,9 +17,15 @@ export class TestPlanApiService {
   }
 
   public addToScenarioList(scenario: Scenario): Observable<boolean> {
-    return new Observable<boolean>(observer => {
-      // this.scenarioList.push(scenario);
-      observer.next(true);
+    return this.http.post<boolean>(`${this.baseUrl}/test-plan/element`, {
+      parentGuid: this.tesPlanGuid,
+      child: {
+        guid: scenario.guid,
+        type: "threadGroup",
+        data: {
+          name: scenario.name
+        }
+      }
     })
   }
 }

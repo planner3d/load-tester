@@ -4,7 +4,7 @@ import {TestPlanApiService} from "../api/test-plan.api.service";
 
 export interface Scenario {
    guid: string;
-   title: string;
+   name: string;
 }
 
 @Injectable()
