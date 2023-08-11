@@ -1,5 +1,9 @@
 package com.example.backend.service;
 
+import java.util.List;
+
+import org.bson.Document;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 public interface LTTestPlan {
@@ -8,7 +12,7 @@ public interface LTTestPlan {
 	
 	Boolean saveTestPlanElement(JsonNode testElement);
 	
-	Object findChildrenByParentGuid(String parentGuid);
+	List<Document> findChildrenByParentGuid(String parentGuid);
 	
 	Boolean updateThreadGroup(JsonNode threadGroup);
 	

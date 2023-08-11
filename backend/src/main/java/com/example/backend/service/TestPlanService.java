@@ -1,9 +1,11 @@
 package com.example.backend.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bson.Document;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.dao.TestPlanDAO;
@@ -39,7 +41,7 @@ public class TestPlanService implements LTTestPlan {
 	}
 
 	@Override
-	public Object findChildrenByParentGuid(String parentGuid) {
+	public List<Document> findChildrenByParentGuid(String parentGuid) {
 		return testPlanDAO
 				.findChildrenByParentGuid(parentGuid);
 	}

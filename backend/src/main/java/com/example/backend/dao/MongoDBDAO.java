@@ -40,19 +40,17 @@ public class MongoDBDAO implements TestPlanDAO {
 				.wasAcknowledged();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Document> findChildrenByParentGuid(String parentGuid) {
 		Query query = new Query(Criteria
 				.where(JsonFieldModel.PARENT_GUID)
 				.is(parentGuid)
 			);
-		return (List<Document>)Objects
-				.requireNonNullElse(
-						mongoTemplate.findOne(query, Document.class, DEFAULT_COLLECTION), 
-						new Document()
-				)
-				.get(JsonFieldModel.CHILDREN);
+		Document document = mongoTemplate
+				.findOne(query, Document.class, DEFAULT_COLLECTION);
+		if (document == null)
+			 return List.of();
+		return (List<Document>)document.get(JsonFieldModel.CHILDREN);
 	}
 
 	@Override
