@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Scenario} from "../data-access/scenario-list.data.service";
-import {Observable} from "rxjs";
+import {first, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 
@@ -13,7 +13,8 @@ export class TestPlanApiService {
   constructor(private http: HttpClient) { }
 
   public getScenarioList(): Observable<Scenario[]> {
-    return this.http.get<Scenario[]>(`${this.baseUrl}/test-plan/element/children?parentGuid=${this.tesPlanGuid}`);
+    return this.http.get<Scenario[]>(`${this.baseUrl}/test-plan/element/children?parentGuid=${this.tesPlanGuid}`)
+        .pipe(first());
   }
 
   public addToScenarioList(scenario: Scenario): Observable<boolean> {
@@ -23,9 +24,11 @@ export class TestPlanApiService {
         guid: scenario.guid,
         type: "threadGroup",
         data: {
-          name: scenario.name
+          name: scenario.data.name
         }
       }
-    })
+    }).pipe(
+        first()
+    )
   }
 }

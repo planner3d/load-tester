@@ -1,6 +1,6 @@
 export enum SAMPLER_TYPES {
-    Http = 'http',
-    Ftp = 'ftp'
+    Http = 'httpSampler',
+    Ftp = 'ftpSampler'
 }
 
 export interface Sampler {

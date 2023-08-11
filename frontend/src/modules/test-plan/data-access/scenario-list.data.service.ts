@@ -3,14 +3,16 @@ import {BehaviorSubject, filter, Observable, shareReplay, switchMap, tap} from "
 import {TestPlanApiService} from "../api/test-plan.api.service";
 
 export interface Scenario {
-   guid: string;
-   name: string;
+    guid: string;
+    data: {
+        name: string;
+    }
 }
 
 @Injectable()
 export class ScenarioListDataService {
 
-  private _scenarioList$ = new BehaviorSubject<Scenario[]>([]);
+  public _scenarioList$ = new BehaviorSubject<Scenario[]>([]);
   public scenarioList$ = this._scenarioList$.asObservable()
       .pipe(shareReplay());
   constructor(private testPlanApiService: TestPlanApiService) {

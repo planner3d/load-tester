@@ -2,25 +2,21 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {HttpSampler} from "../types/http-sampler";
 import {SelectedScenarioApiService} from "../api/selected-scenario.api.service";
-import {Router} from "@angular/router";
-import {FtpSampler} from "../types/ftp-sampler";
-
-export interface SelectedScenario {
-  guid: string;
-  name: string;
-  samplerList: Array<HttpSampler | FtpSampler>;
-}
+import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
 
 @Injectable()
 export class SelectedScenarioDataService {
 
-  public selectedScenario$ = new BehaviorSubject<SelectedScenario | undefined>(undefined);
+  public selectedScenario$ = new BehaviorSubject<Scenario | undefined>(undefined);
+  public scenarioElementList$ = new BehaviorSubject<HttpSampler[]>([]); // temp type
+
   constructor(private selectedScenarioApiService: SelectedScenarioApiService) { }
 
-  public loadSelectedScenario(guid: SelectedScenario['guid']): Observable<SelectedScenario | undefined> {
-    return this.selectedScenarioApiService.getSelectedScenario(guid)
+  public loadScenarioElementList(guid: Scenario['guid']): Observable<HttpSampler[]> {
+    return this.selectedScenarioApiService.getScenarioElementList(guid)
         .pipe(
-            tap(selectedScenario => this.selectedScenario$.next(selectedScenario))
+            tap(console.log),
+            tap(scenarioElementList => this.scenarioElementList$.next(scenarioElementList))
         );
   }
 }

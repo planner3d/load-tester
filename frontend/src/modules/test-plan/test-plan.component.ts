@@ -8,6 +8,8 @@ import {ErrorComponent} from "../../core/components/error/error.component";
 import {ScenarioListComponent} from "./features/scenario-list/scenario-list.component";
 import {SelectedScenarioComponent} from "../selected-scenario/selected-scenario.component";
 import {ScenarioListDataService} from "./data-access/scenario-list.data.service";
+import {SelectedScenarioDataService} from "../selected-scenario/data-access/selected-scenario.data.service";
+import {SelectedScenarioApiService} from "../selected-scenario/api/selected-scenario.api.service";
 
 @Component({
   selector: 'app-test-plan',
@@ -24,6 +26,8 @@ import {ScenarioListDataService} from "./data-access/scenario-list.data.service"
     ],
   providers: [
       ScenarioListDataService,
+      SelectedScenarioDataService,
+      SelectedScenarioApiService,
       TestPlanApiService,
   ],
   templateUrl: './test-plan.component.html',
