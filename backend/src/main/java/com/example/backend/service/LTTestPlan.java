@@ -14,4 +14,6 @@ public interface LTTestPlan {
 	
 	Boolean updateTestPlanElements(JsonNode[] testElements);
 
+	void deleteDefaultUserCollection();
+	
 }

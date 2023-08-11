@@ -69,4 +69,9 @@ public class TestPlanService implements LTTestPlan {
 		return !resultSet.contains(false);
 	}
 
+	@Override
+	public void deleteDefaultUserCollection() {
+		testPlanDAO.deleteDefaultUserCollection();
+	}
+
 }

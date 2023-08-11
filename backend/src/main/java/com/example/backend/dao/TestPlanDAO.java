@@ -13,5 +13,7 @@ public interface TestPlanDAO {
 	List<?> findChildrenByParentGuid(String parentGuid);
 	
 	Boolean updateTestPlanElement(String parentGuid, String guid, JsonNode data);
+	
+	void deleteDefaultUserCollection();
 
 }
