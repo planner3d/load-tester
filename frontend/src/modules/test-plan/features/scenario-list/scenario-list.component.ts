@@ -28,7 +28,7 @@ export class ScenarioListComponent implements OnInit {
         .pipe(
             untilDestroyed(this),
         )
-        .subscribe();
+        .subscribe(console.log);
   }
 
   protected onAddToList(): void {
