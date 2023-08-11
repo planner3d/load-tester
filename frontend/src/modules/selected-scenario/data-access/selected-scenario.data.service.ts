@@ -15,7 +15,6 @@ export class SelectedScenarioDataService {
   public loadScenarioElementList(guid: Scenario['guid']): Observable<HttpSampler[]> {
     return this.selectedScenarioApiService.getScenarioElementList(guid)
         .pipe(
-            tap(console.log),
             tap(scenarioElementList => this.scenarioElementList$.next(scenarioElementList))
         );
   }

@@ -78,7 +78,6 @@ export class HttpBodyRequestComponent implements OnInit {
               endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
             }
           })
-          console.log(this.editedSamplersDataService.editedHttpSamplers$.getValue())
       });
   }
 
