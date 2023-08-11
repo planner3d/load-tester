@@ -23,7 +23,7 @@ public class CorsConfig implements Filter {
 			throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Origin", "https://frontend.1531423-carruners.twc1.net");
         response.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,DELETE,PUT,POST");
         response.setHeader("Content-Type", "application/json");
         response
