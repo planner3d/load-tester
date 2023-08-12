@@ -2,7 +2,6 @@ package com.example.backend.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -51,6 +50,15 @@ public class MongoDBDAO implements TestPlanDAO {
 		if (document == null)
 			 return List.of();
 		return (List<Document>)document.get(JsonFieldModel.CHILDREN);
+	}
+	
+	@Override
+	public Document findTestPlanByGuid(String testPlanGuid) {
+		Query query = new Query(Criteria
+				.where(JsonFieldModel.GUID)
+				.is(testPlanGuid)
+			);
+		return mongoTemplate.findOne(query, Document.class, DEFAULT_COLLECTION);
 	}
 
 	@Override

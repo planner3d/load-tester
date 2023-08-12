@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.bson.Document;
 
@@ -19,5 +20,7 @@ public interface LTTestPlan {
 	Boolean updateTestPlanElements(JsonNode[] testElements);
 
 	void deleteDefaultUserCollection();
+	
+	List<String[]> startTestPlan(Map<String, String> testPlanGuid);
 	
 }
