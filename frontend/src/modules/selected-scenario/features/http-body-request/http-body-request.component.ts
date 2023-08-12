@@ -6,7 +6,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_METHODS, HttpSampler} from "../../types/http-sampler";
 import {EditedHttpSamplersDataService} from "../../data-access/edited-http-samplers.data.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {SAMPLER_TYPES} from "../../types/sampler";
+import {TEST_PLAN_TYPES, TestPlanElement} from "../../../../core/types/test-plan";
 
 
 export interface HttpSamplerRequestForm {
@@ -30,7 +30,7 @@ export interface HttpMethodOption {
 export class HttpBodyRequestComponent implements OnInit {
 
   @Input()
-  public httpSampler?: HttpSampler;
+  public httpSampler?: TestPlanElement<HttpSampler>;
 
   protected httpSamplerRequestForm = new FormGroup<HttpSamplerRequestForm>({
     method: new FormControl<HTTP_METHODS | null>(null),
@@ -57,10 +57,10 @@ export class HttpBodyRequestComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (!this.httpSampler || !this.httpSampler.domain || !this.httpSampler.endpoint) return;
+    if (!this.httpSampler || !this.httpSampler.data?.domain || !this.httpSampler.data?.endpoint) return;
     this.httpSamplerRequestForm.setValue({
-      method: this.httpSampler.method ?? null,
-      url: this.httpSampler.domain + this.httpSampler.endpoint ?? null,
+      method: this.httpSampler.data.method ?? null,
+      url: this.httpSampler.data.domain + this.httpSampler.data.endpoint ?? null,
     });
 
     this.httpSamplerRequestForm.valueChanges
@@ -72,10 +72,12 @@ export class HttpBodyRequestComponent implements OnInit {
           this.editedSamplersDataService.patchEditedHttpSamplers({
             [this.httpSampler.guid]: {
               guid: this.httpSampler.guid,
-              method: httpSamplerChanges.method,
-              type: SAMPLER_TYPES.Http,
-              domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
-              endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
+              type: TEST_PLAN_TYPES.HttpSampler,
+              data: {
+                method: httpSamplerChanges.method,
+                domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
+                endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
+              }
             }
           })
       });

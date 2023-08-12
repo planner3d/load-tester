@@ -2,7 +2,7 @@
     <div *ngIf="selectedScenarioDataService.selectedScenario$ | async as selectedScenario; else empty" class="scenario">
         <header class="scenario__header">
             <div class="container">
-                {{ selectedScenario.data.name }}
+                {{ selectedScenario.data?.name }}
             </div>
         </header>
         <main class="scenario__body">
@@ -21,7 +21,7 @@
                         </p-accordionTab>
                     </p-accordion>
                 </ng-container>
-                <app-add-to-list-btn (addToList)="selectedScenarioDataService.addScenarioElement()"></app-add-to-list-btn>
+                <app-add-to-list-btn (addToList)="onAddToList(selectedScenario.guid)"></app-add-to-list-btn>
             </div>
         </main>
     </div>

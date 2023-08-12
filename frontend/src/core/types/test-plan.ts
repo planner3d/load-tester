@@ -7,7 +7,7 @@ export enum TEST_PLAN_TYPES {
 export interface TestPlanElement<TData> {
     guid: string;
     type: TEST_PLAN_TYPES,
-    data: TData;
+    data?: TData;
 }
 
 export interface UpdateTestPlanChildRequest<TData> {

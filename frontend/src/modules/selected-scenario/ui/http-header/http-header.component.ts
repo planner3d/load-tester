@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HttpSampler} from "../../types/http-sampler";
 import {EditedHttpSamplersDataService} from "../../data-access/edited-http-samplers.data.service";
+import {TestPlanElement} from "../../../../core/types/test-plan";
 
 @Component({
   selector: 'app-http-header',
@@ -14,7 +15,7 @@ import {EditedHttpSamplersDataService} from "../../data-access/edited-http-sampl
 export class HttpHeaderComponent {
 
   @Input()
-  public httpSampler?: HttpSampler;
+  public httpSampler?: TestPlanElement<HttpSampler>;
 
   constructor(protected editedHttpSamplersDataService: EditedHttpSamplersDataService) {
   }

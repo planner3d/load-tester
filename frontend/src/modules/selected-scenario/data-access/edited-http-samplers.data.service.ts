@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpSampler} from "../types/http-sampler";
 import {BehaviorSubject} from "rxjs";
+import {TestPlanElement} from "../../../core/types/test-plan";
 
 export interface EditedHttpSamplers {
-    [guid: string]: HttpSampler;
+    [guid: string]: TestPlanElement<HttpSampler>;
 }
 
 @Injectable()
