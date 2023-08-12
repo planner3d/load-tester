@@ -4,6 +4,7 @@
             <div class="container scenario__header-container">
                 <span class="scenario__header-title">{{ selectedScenario.data?.name }}</span>
                 <i
+                    *ngIf="editedHttpSamplersDataService.editedHttpSamplers$ | async"
                     class="pi pi-save scenario__header-save-icon"
                     (click)="saveEditedElements()"
                 ></i>
@@ -25,7 +26,9 @@
                         </p-accordionTab>
                     </p-accordion>
                 </ng-container>
-                <app-add-to-list-btn (addToList)="onAddToList(selectedScenario.guid)"></app-add-to-list-btn>
+                <app-add-to-list-btn
+                        (addToList)="onAddToList(selectedScenario.guid)"
+                ></app-add-to-list-btn>
             </div>
         </main>
     </div>

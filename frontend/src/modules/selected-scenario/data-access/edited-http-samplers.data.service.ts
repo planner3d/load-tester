@@ -10,10 +10,12 @@ export interface EditedHttpSamplers {
 @Injectable()
 export class EditedHttpSamplersDataService {
 
-  public editedHttpSamplers$ = new BehaviorSubject<Partial<EditedHttpSamplers>>({});
+  public editedHttpSamplers$ = new BehaviorSubject<Partial<EditedHttpSamplers> | undefined>(undefined);
 
   public get editedHttpSamplers(): Partial<EditedHttpSamplers> {
-      return this.editedHttpSamplers$.getValue();
+      const editedHttpSamplers = this.editedHttpSamplers$.getValue();
+      if (!editedHttpSamplers) return {};
+      return editedHttpSamplers;
   }
 
   public patchEditedHttpSamplers(editedHttpSamplers: Partial<EditedHttpSamplers>): void {

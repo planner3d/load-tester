@@ -11,4 +11,5 @@ export interface HttpSampler {
     domain?: string | null;
     method?: HTTP_METHODS | null;
     endpoint?: string | null;
+    selected?: boolean;
 }

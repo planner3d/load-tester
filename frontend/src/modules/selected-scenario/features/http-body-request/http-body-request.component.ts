@@ -55,22 +55,25 @@ export class HttpBodyRequestComponent implements OnInit {
   constructor(
       private editedSamplersDataService: EditedHttpSamplersDataService,
   ) {
+  }
 
+  private setDefaultValues(): void {
+    const domain = this.httpSampler?.data?.domain ?? '';
+    const endpoint = this.httpSampler?.data?.endpoint ?? '';
+    this.httpSamplerRequestForm.setValue({
+      method: this.httpSampler?.data?.method ?? null,
+      url: domain + endpoint,
+    }, {emitEvent: false});
   }
 
   public ngOnInit(): void {
-    if (!this.httpSampler || !this.httpSampler.data?.domain || !this.httpSampler.data?.endpoint) return;
-    this.httpSamplerRequestForm.setValue({
-      method: this.httpSampler.data.method ?? null,
-      url: this.httpSampler.data.domain + this.httpSampler.data.endpoint ?? null,
-    });
+    this.setDefaultValues();
 
     this.httpSamplerRequestForm.valueChanges
         .pipe(
             untilDestroyed(this),
         )
         .subscribe(httpSamplerChanges => {
-          console.log(43483984)
           if (!this.httpSampler) return;
           this.editedSamplersDataService.patchEditedHttpSamplers({
             [this.httpSampler.guid]: {
@@ -86,5 +89,4 @@ export class HttpBodyRequestComponent implements OnInit {
           console.log(this.editedSamplersDataService.editedHttpSamplers, 111)
       });
   }
-
 }
