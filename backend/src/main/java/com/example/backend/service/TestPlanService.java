@@ -152,7 +152,7 @@ public class TestPlanService implements LTTestPlan {
             summer = new Summariser(summariserName);
         }
         
-        clearResultCollectorFile();
+        deleteResultCollectorFile();
         
         ResultCollector logger = new ResultCollector(summer);
         logger.setFilename(resultCollectorPath);
@@ -162,7 +162,7 @@ public class TestPlanService implements LTTestPlan {
         TestPlanModel.testPlanTree.add(testPlan, logger);
 	}
 	
-	private void clearResultCollectorFile() {
+	private void deleteResultCollectorFile() {
 		new File(resultCollectorPath).delete();
 	}
 	
