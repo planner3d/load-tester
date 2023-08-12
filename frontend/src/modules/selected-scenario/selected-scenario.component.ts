@@ -13,12 +13,13 @@ import {ScenarioListComponent} from "../test-plan/features/scenario-list/scenari
 import {SelectedScenarioDataService} from "./data-access/selected-scenario.data.service";
 import {ScenarioListDataService} from "../test-plan/data-access/scenario-list.data.service";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {AddToListBtnComponent} from "../../shared/add-to-list-btn/add-to-list-btn.component";
 
 @UntilDestroy()
 @Component({
   selector: 'app-selected-scenario',
   standalone: true,
-    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent, ProgressSpinnerModule],
+    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent, ProgressSpinnerModule, AddToListBtnComponent],
   providers: [
       EditedHttpSamplersDataService,
   ],
@@ -62,5 +63,4 @@ export class SelectedScenarioComponent implements OnInit {
     this.subOnSelectedScenarioReassign();
     this.subOnSelectedScenarioElements();
   }
-
 }

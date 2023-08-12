@@ -27,12 +27,11 @@ export class ScenarioListDataService {
           );
   }
 
-  public addToScenarioList(scenario: TestPlanElement<Scenario>): Observable<TestPlanElement<Scenario>[]> {
+  public addToScenarioList(scenario: TestPlanElement<Scenario>): Observable<boolean> {
       return this.testPlanApiService.addToScenarioList(scenario)
           .pipe(
               filter(status => status),
-              switchMap(() => this.getScenarioList()),
-              tap(scenarioList => this._scenarioList$.next(scenarioList))
+              tap(scenarioList => this._scenarioList$.next([...this._scenarioList$.getValue(), scenario])),
           );
   }
 

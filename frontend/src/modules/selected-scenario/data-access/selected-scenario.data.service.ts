@@ -22,4 +22,8 @@ export class SelectedScenarioDataService {
             finalize(() => this.loading$.next(false))
         );
   }
+
+  public addScenarioElement(): void {
+
+  }
 }
