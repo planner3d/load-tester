@@ -1,5 +1,8 @@
 package com.example.backend.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +54,11 @@ public class TestPlanController {
 	public ResponseEntity<?> deleteDefaultUserCollection() {
 		testPlan.deleteDefaultUserCollection();
 		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/test-plan/result")
+	public List<String[]> startTestPlan(@RequestParam Map<String, String> testPlanGuid) {
+		return testPlan.startTestPlan(testPlanGuid);
 	}
 
 }

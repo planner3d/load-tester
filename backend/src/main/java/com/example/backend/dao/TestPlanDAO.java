@@ -14,6 +14,8 @@ public interface TestPlanDAO {
 	
 	List<Document> findChildrenByParentGuid(String parentGuid);
 	
+	Document findTestPlanByGuid(String testPlanGuid);
+	
 	Boolean updateTestPlanElement(String parentGuid, String guid, JsonNode data);
 	
 	void deleteDefaultUserCollection();
