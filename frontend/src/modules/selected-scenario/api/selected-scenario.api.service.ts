@@ -4,7 +4,12 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {HttpSampler} from "../types/http-sampler";
 import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
-import {AddTestPlanChildRequest, TEST_PLAN_TYPES, TestPlanElement} from "../../../core/types/test-plan";
+import {
+  AddTestPlanChildRequest,
+  TEST_PLAN_TYPES,
+  TestPlanElement,
+  UpdateTestPlanChildRequest
+} from "../../../core/types/test-plan";
 import {v4} from "uuid";
 
 @Injectable()
@@ -27,5 +32,10 @@ export class SelectedScenarioApiService {
     return this.http.post<boolean>(`${this.baseUrl}/test-plan/element`, requestBody).pipe(
         first()
     )
+  }
+
+  public updateScenarioElements(editedElements: UpdateTestPlanChildRequest<HttpSampler>[]): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/test-plan/elements`, editedElements)
+        .pipe(first());
   }
 }

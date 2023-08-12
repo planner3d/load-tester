@@ -1,8 +1,12 @@
 <ng-container *ngIf="!(selectedScenarioDataService.loading$ | async); else loading">
     <div *ngIf="selectedScenarioDataService.selectedScenario$ | async as selectedScenario; else empty" class="scenario">
         <header class="scenario__header">
-            <div class="container">
-                {{ selectedScenario.data?.name }}
+            <div class="container scenario__header-container">
+                <span class="scenario__header-title">{{ selectedScenario.data?.name }}</span>
+                <i
+                    class="pi pi-save scenario__header-save-icon"
+                    (click)="saveEditedElements()"
+                ></i>
             </div>
         </header>
         <main class="scenario__body">

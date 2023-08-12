@@ -35,6 +35,7 @@ export class SelectedScenarioComponent implements OnInit {
   constructor(
       protected selectedScenarioDataService: SelectedScenarioDataService,
       protected scenarioListDataService: ScenarioListDataService,
+      private editedHttpSamplersDataService: EditedHttpSamplersDataService,
       private route: ActivatedRoute,
   ) {}
 
@@ -73,6 +74,14 @@ export class SelectedScenarioComponent implements OnInit {
           }
       };
       this.selectedScenarioDataService.addScenarioElement(guid, httpSampler)
+            .subscribe();
+    }
+
+    protected saveEditedElements(): void {
+        const selectedScenario = this.selectedScenarioDataService.selectedScenario$.getValue();
+        if (!selectedScenario) return;
+        console.log(this.editedHttpSamplersDataService.editedHttpSamplers)
+        this.selectedScenarioDataService.updateScenarioElements(selectedScenario.guid, this.editedHttpSamplersDataService.editedHttpSamplers)
             .subscribe();
     }
 

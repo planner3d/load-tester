@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, filter, finalize, Observable, tap} from "rxjs";
+import {BehaviorSubject, filter, finalize, map, Observable, of, switchMap, tap, withLatestFrom} from "rxjs";
 import {HttpSampler} from "../types/http-sampler";
 import {SelectedScenarioApiService} from "../api/selected-scenario.api.service";
 import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
-import {TestPlanElement} from "../../../core/types/test-plan";
+import {TestPlanElement, UpdateTestPlanChildRequest} from "../../../core/types/test-plan";
+import {EditedHttpSamplers} from "./edited-http-samplers.data.service";
+import {isDefined} from "../../../core/utils/is-defined";
 
 @Injectable()
 export class SelectedScenarioDataService {
@@ -28,6 +30,20 @@ export class SelectedScenarioDataService {
         .pipe(
             filter(status => status),
             tap(() => this.scenarioElementList$.next([...this.scenarioElementList$.getValue(), elementToAdd]))
+        )
+  }
+
+  public updateScenarioElements(parentGuid: TestPlanElement<Scenario>['guid'], editedElements: Partial<EditedHttpSamplers>): Observable<TestPlanElement<HttpSampler>[]> {
+    return of(editedElements)
+        .pipe(
+            map(elements => Object.values(elements)),
+            tap(console.log),
+            map(elements => elements.map((element:any) =>
+                ({ ...element, parentGuid } as UpdateTestPlanChildRequest<HttpSampler>))),
+            switchMap(updatedElements => this.selectedScenarioApiService.updateScenarioElements(updatedElements)),
+            filter(status => status),
+            switchMap(() => this.selectedScenarioApiService.getScenarioElementList(parentGuid)),
+            tap(scenarioElements => this.scenarioElementList$.next(scenarioElements)),
         )
   }
 }

@@ -13,6 +13,7 @@ export interface TestPlanElement<TData> {
 export interface UpdateTestPlanChildRequest<TData> {
     parentGuid: string;
     guid: string;
+    type: TEST_PLAN_TYPES.HttpSampler;
     data: TData;
 }
 

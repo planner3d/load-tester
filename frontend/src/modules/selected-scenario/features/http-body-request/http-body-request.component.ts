@@ -52,7 +52,9 @@ export class HttpBodyRequestComponent implements OnInit {
     },
   ];
 
-  constructor(private editedSamplersDataService: EditedHttpSamplersDataService) {
+  constructor(
+      private editedSamplersDataService: EditedHttpSamplersDataService,
+  ) {
 
   }
 
@@ -68,6 +70,7 @@ export class HttpBodyRequestComponent implements OnInit {
             untilDestroyed(this),
         )
         .subscribe(httpSamplerChanges => {
+          console.log(43483984)
           if (!this.httpSampler) return;
           this.editedSamplersDataService.patchEditedHttpSamplers({
             [this.httpSampler.guid]: {
@@ -79,7 +82,8 @@ export class HttpBodyRequestComponent implements OnInit {
                 endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
               }
             }
-          })
+          });
+          console.log(this.editedSamplersDataService.editedHttpSamplers, 111)
       });
   }
 
