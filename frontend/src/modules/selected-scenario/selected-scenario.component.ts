@@ -5,19 +5,20 @@ import {HttpBodyComponent} from "./features/http-body/http-body.component";
 import {AccordionModule} from "primeng/accordion";
 import {EditedHttpSamplersDataService} from "./data-access/edited-http-samplers.data.service";
 import {ActivatedRoute} from "@angular/router";
-import {filter, first, map, switchMap, tap, withLatestFrom} from "rxjs";
+import { filter, first, map,  switchMap, withLatestFrom} from "rxjs";
 import {DragDropModule} from "primeng/dragdrop";
 import {ErrorComponent} from "../../core/components/error/error.component";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {ScenarioListComponent} from "../test-plan/features/scenario-list/scenario-list.component";
 import {SelectedScenarioDataService} from "./data-access/selected-scenario.data.service";
-import {Scenario, ScenarioListDataService} from "../test-plan/data-access/scenario-list.data.service";
+import {ScenarioListDataService} from "../test-plan/data-access/scenario-list.data.service";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @UntilDestroy()
 @Component({
   selector: 'app-selected-scenario',
   standalone: true,
-    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent],
+    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent, ProgressSpinnerModule],
   providers: [
       EditedHttpSamplersDataService,
   ],
@@ -29,7 +30,7 @@ export class SelectedScenarioComponent implements OnInit {
 
   constructor(
       protected selectedScenarioDataService: SelectedScenarioDataService,
-      private scenarioListDataService: ScenarioListDataService,
+      protected scenarioListDataService: ScenarioListDataService,
       private route: ActivatedRoute,
   ) {}
 
@@ -40,7 +41,7 @@ export class SelectedScenarioComponent implements OnInit {
                 switchMap(() => this.scenarioListDataService.getScenarioList()),
                 withLatestFrom(this.route.params),
                 filter(([list, params]) => params['id']),
-                map(([scenarioList, params]) => scenarioList.find((scenario: Scenario) => scenario.guid === params['id'])),
+                map(([scenarioList, params]) => scenarioList.find(scenario => scenario.guid === params['id'])),
                 first(),
             )
             .subscribe(selectedScenario => {
@@ -48,7 +49,7 @@ export class SelectedScenarioComponent implements OnInit {
             });
     }
 
-    private subOnSelectedScenarioChanges(): void {
+    private subOnSelectedScenarioElements(): void {
         this.route.params
             .pipe(
                 switchMap(params => this.selectedScenarioDataService.loadScenarioElementList(params['id'])),
@@ -59,7 +60,7 @@ export class SelectedScenarioComponent implements OnInit {
 
   public ngOnInit(): void {
     this.subOnSelectedScenarioReassign();
-    this.subOnSelectedScenarioChanges();
+    this.subOnSelectedScenarioElements();
   }
 
 }

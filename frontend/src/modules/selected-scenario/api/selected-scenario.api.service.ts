@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {HttpSampler} from "../types/http-sampler";
 import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
+import {TestPlanElement} from "../../../core/types/test-plan";
 
 @Injectable()
 export class SelectedScenarioApiService {
@@ -12,7 +13,7 @@ export class SelectedScenarioApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getScenarioElementList(guid: Scenario['guid']): Observable<HttpSampler[]> {
+  public getScenarioElementList(guid: TestPlanElement<Scenario>['guid']): Observable<HttpSampler[]> {
     return this.http.get<HttpSampler[]>(`${this.baseUrl}/test-plan/element/children?parentGuid=${guid}`)
         .pipe(first());
   }

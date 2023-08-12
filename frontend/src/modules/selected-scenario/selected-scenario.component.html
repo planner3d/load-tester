@@ -1,26 +1,34 @@
-<div *ngIf="selectedScenarioDataService.selectedScenario$ | async as selectedScenario; else empty" class="scenario">
-    <header class="scenario__header">
-        <div class="container">
-            {{ selectedScenario.data.name }}
-        </div>
-    </header>
-    <main class="scenario__body">
-        <div class="container">
-            <p-accordion *ngIf="selectedScenarioDataService.scenarioElementList$ | async as scenarioElementList" styleClass="scenario__elements">
-                <p-accordionTab
-                         *ngFor="let sampler of scenarioElementList"
-                >
-                    <ng-template pTemplate="header">
-                        <app-http-header [httpSampler]="sampler"></app-http-header>
-                    </ng-template>
-                    <ng-template pTemplate="content">
-                        <app-http-body [httpSampler]="sampler"></app-http-body>
-                    </ng-template>
-                </p-accordionTab>
-            </p-accordion>
-        </div>
-    </main>
-</div>
+<ng-container *ngIf="!(selectedScenarioDataService.loading$ | async); else loading">
+    <div *ngIf="selectedScenarioDataService.selectedScenario$ | async as selectedScenario; else empty" class="scenario">
+        <header class="scenario__header">
+            <div class="container">
+                {{ selectedScenario.data.name }}
+            </div>
+        </header>
+        <main class="scenario__body">
+            <div class="container">
+                <ng-container *ngIf="!(scenarioListDataService.loading$ | async); else loading">
+                    <p-accordion *ngIf="selectedScenarioDataService.scenarioElementList$ | async as scenarioElementList" styleClass="scenario__elements">
+                        <p-accordionTab
+                                 *ngFor="let sampler of scenarioElementList"
+                        >
+                            <ng-template pTemplate="header">
+                                <app-http-header [httpSampler]="sampler"></app-http-header>
+                            </ng-template>
+                            <ng-template pTemplate="content">
+                                <app-http-body [httpSampler]="sampler"></app-http-body>
+                            </ng-template>
+                        </p-accordionTab>
+                    </p-accordion>
+                </ng-container>
+            </div>
+        </main>
+    </div>
+</ng-container>
+
+<ng-template #loading>
+    <p-progressSpinner></p-progressSpinner>
+</ng-template>
 
 <ng-template #empty>
     <div class="scenario-empty">

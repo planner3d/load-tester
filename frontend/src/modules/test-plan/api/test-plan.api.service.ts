@@ -3,6 +3,7 @@ import {Scenario} from "../data-access/scenario-list.data.service";
 import {first, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {AddTestPlanChildRequest, TestPlanElement} from "../../../core/types/test-plan";
 
 @Injectable()
 export class TestPlanApiService {
@@ -12,22 +13,17 @@ export class TestPlanApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getScenarioList(): Observable<Scenario[]> {
-    return this.http.get<Scenario[]>(`${this.baseUrl}/test-plan/element/children?parentGuid=${this.tesPlanGuid}`)
+  public getScenarioList(): Observable<TestPlanElement<Scenario>[]> {
+    return this.http.get<TestPlanElement<Scenario>[]>(`${this.baseUrl}/test-plan/element/children?parentGuid=${this.tesPlanGuid}`)
         .pipe(first());
   }
 
-  public addToScenarioList(scenario: Scenario): Observable<boolean> {
-    return this.http.post<boolean>(`${this.baseUrl}/test-plan/element`, {
+  public addToScenarioList(scenario: TestPlanElement<Scenario>): Observable<boolean> {
+    const requestBody: AddTestPlanChildRequest<Scenario> = {
       parentGuid: this.tesPlanGuid,
-      child: {
-        guid: scenario.guid,
-        type: "threadGroup",
-        data: {
-          name: scenario.data.name
-        }
-      }
-    }).pipe(
+      child: { ...scenario }
+    }
+    return this.http.post<boolean>(`${this.baseUrl}/test-plan/element`, requestBody).pipe(
         first()
     )
   }
