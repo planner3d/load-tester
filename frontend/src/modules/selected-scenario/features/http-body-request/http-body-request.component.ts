@@ -59,7 +59,7 @@ export class HttpBodyRequestComponent implements OnInit {
 
   private setDefaultValues(): void {
     const domain = this.httpSampler?.data?.domain ?? '';
-    const endpoint = this.httpSampler?.data?.endpoint ?? '';
+    const endpoint = this.httpSampler?.data?.endpoint ?? '/';
     this.httpSamplerRequestForm.setValue({
       method: this.httpSampler?.data?.method ?? null,
       url: domain + endpoint,
@@ -75,14 +75,15 @@ export class HttpBodyRequestComponent implements OnInit {
         )
         .subscribe(httpSamplerChanges => {
           if (!this.httpSampler) return;
+          const slashIndex = httpSamplerChanges.url?.indexOf('/') ?? -1;
           this.editedSamplersDataService.patchEditedHttpSamplers({
             [this.httpSampler.guid]: {
               guid: this.httpSampler.guid,
               type: TEST_PLAN_TYPES.HttpSampler,
               data: {
                 method: httpSamplerChanges.method,
-                domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
-                endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
+                domain: slashIndex !== -1 ? httpSamplerChanges.url?.slice(0, slashIndex) :  httpSamplerChanges.url,
+                endpoint: slashIndex !== -1 ? httpSamplerChanges.url?.slice(slashIndex) : '/',
               }
             }
           });
