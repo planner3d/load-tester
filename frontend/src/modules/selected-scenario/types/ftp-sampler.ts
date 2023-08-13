@@ -1,5 +1,3 @@
-import {Sampler} from "./sampler";
-
-export interface FtpSampler extends Sampler {
+export interface FtpSampler {
     destination?: string; // just for fun
 }

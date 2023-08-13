@@ -37,7 +37,6 @@ export class SelectedScenarioDataService {
     return of(editedElements)
         .pipe(
             map(elements => Object.values(elements)),
-            tap(console.log),
             map(elements => elements.map((element:any) =>
                 ({ ...element, parentGuid } as UpdateTestPlanChildRequest<HttpSampler>))),
             switchMap(updatedElements => this.selectedScenarioApiService.updateScenarioElements(updatedElements)),

@@ -1,5 +1,3 @@
-import {Sampler} from "./sampler";
-
 export enum HTTP_METHODS {
     Post = 'POST',
     Get = 'GET',
