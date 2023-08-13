@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Scenario} from "../data-access/scenario-list.data.service";
-import {first, Observable} from "rxjs";
+import {filter, first, Observable, share, shareReplay} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {AddTestPlanChildRequest, TestPlanElement} from "../../../core/types/test-plan";
+import {isDefined} from "../../../core/utils/is-defined";
 
 @Injectable()
 export class TestPlanApiService {
@@ -26,5 +27,14 @@ export class TestPlanApiService {
     return this.http.post<boolean>(`${this.baseUrl}/test-plan/element`, requestBody).pipe(
         first()
     )
+  }
+
+  public runTestPlan(): Observable<string[][]> {
+    return this.http.get<string[][]>(`${this.baseUrl}/test-plan/result?guid=${this.tesPlanGuid}`)
+        .pipe(
+            first(),
+            filter(isDefined),
+            filter(result => !!result.length),
+        );
   }
 }

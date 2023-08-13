@@ -17,7 +17,19 @@
 .sidebar__header {
   @include header.header;
   background-color: colors.$primary-color-body;
-  text-align: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar__header-run-test {
+  color: green;
+  cursor: pointer;
+}
+
+.sidebar__header-run-test:hover {
+  transform: scale(1.1);
 }
 
 .sidebar__body {

@@ -1,5 +1,11 @@
 <aside class="sidebar">
-    <header class="sidebar__header">Test plan</header>
+    <header class="sidebar__header">
+        <h4>Test plan</h4>
+        <i
+            class="pi pi-play sidebar__header-run-test"
+            (click)="runTestPlan()"
+        ></i>
+    </header>
     <div class="sidebar__body">
         <ng-content></ng-content>
     </div>

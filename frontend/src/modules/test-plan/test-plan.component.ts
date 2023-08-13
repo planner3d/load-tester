@@ -10,6 +10,7 @@ import {SelectedScenarioComponent} from "../selected-scenario/selected-scenario.
 import {ScenarioListDataService} from "./data-access/scenario-list.data.service";
 import {SelectedScenarioDataService} from "../selected-scenario/data-access/selected-scenario.data.service";
 import {SelectedScenarioApiService} from "../selected-scenario/api/selected-scenario.api.service";
+import {DialogService} from "primeng/dynamicdialog";
 
 @Component({
   selector: 'app-test-plan',
@@ -29,6 +30,7 @@ import {SelectedScenarioApiService} from "../selected-scenario/api/selected-scen
       SelectedScenarioDataService,
       SelectedScenarioApiService,
       TestPlanApiService,
+      DialogService
   ],
   templateUrl: './test-plan.component.html',
   styleUrls: ['./test-plan.component.scss'],
