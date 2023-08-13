@@ -30,7 +30,7 @@ export class TestPlanApiService {
   }
 
   public runTestPlan(): Observable<string[][]> {
-    return this.http.get<string[][]>(`${this.baseUrl}/test-plan/result?guid=${this.tesPlanGuid}`)
+    return this.http.get<string[][]>(`${this.baseUrl}/test-plan/result?testPlanGuid=${this.tesPlanGuid}`)
         .pipe(
             first(),
         );
