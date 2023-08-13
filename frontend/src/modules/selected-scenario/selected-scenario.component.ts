@@ -5,23 +5,26 @@ import {HttpBodyComponent} from "./features/http-body/http-body.component";
 import {AccordionModule} from "primeng/accordion";
 import {EditedHttpSamplersDataService} from "./data-access/edited-http-samplers.data.service";
 import {ActivatedRoute} from "@angular/router";
-import {switchMap} from "rxjs";
+import {filter, first, map, switchMap, withLatestFrom} from "rxjs";
 import {DragDropModule} from "primeng/dragdrop";
 import {ErrorComponent} from "../../core/components/error/error.component";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {ScenarioListComponent} from "../test-plan/features/scenario-list/scenario-list.component";
 import {SelectedScenarioDataService} from "./data-access/selected-scenario.data.service";
-import {SelectedScenarioApiService} from "./api/selected-scenario.api.service";
+import {Scenario, ScenarioListDataService} from "../test-plan/data-access/scenario-list.data.service";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {AddToListBtnComponent} from "../../shared/add-to-list-btn/add-to-list-btn.component";
+import {TEST_PLAN_TYPES, TestPlanElement} from "../../core/types/test-plan";
+import {HTTP_METHODS, HttpSampler} from "./types/http-sampler";
+import {v4} from "uuid";
 
 @UntilDestroy()
 @Component({
   selector: 'app-selected-scenario',
   standalone: true,
-    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent],
+    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent, ProgressSpinnerModule, AddToListBtnComponent],
   providers: [
       EditedHttpSamplersDataService,
-      SelectedScenarioDataService,
-      SelectedScenarioApiService
   ],
   templateUrl: './selected-scenario.component.html',
   styleUrls: ['./selected-scenario.component.scss'],
@@ -31,15 +34,58 @@ export class SelectedScenarioComponent implements OnInit {
 
   constructor(
       protected selectedScenarioDataService: SelectedScenarioDataService,
+      protected scenarioListDataService: ScenarioListDataService,
+      protected editedHttpSamplersDataService: EditedHttpSamplersDataService,
       private route: ActivatedRoute,
   ) {}
-  public ngOnInit(): void {
-    this.route.params
-        .pipe(
-            switchMap(params => this.selectedScenarioDataService.loadSelectedScenario(params['id'])),
-            untilDestroyed(this),
-        )
-        .subscribe();
-  }
 
+    private subOnSelectedScenarioReassign(): void {
+        this.selectedScenarioDataService.selectedScenario$
+            .pipe(
+                filter(selectedScenario => !selectedScenario),
+                switchMap(() => this.scenarioListDataService.getScenarioList()),
+                withLatestFrom(this.route.params),
+                filter(([list, params]) => params['id']),
+                map(([scenarioList, params]) => scenarioList.find(scenario => scenario.guid === params['id'])),
+                first(),
+            )
+            .subscribe(selectedScenario => {
+                this.selectedScenarioDataService.selectedScenario$.next(selectedScenario)
+            });
+    }
+
+    private subOnSelectedScenarioElements(): void {
+        this.route.params
+            .pipe(
+                switchMap(params => this.selectedScenarioDataService.loadScenarioElementList(params['id'])),
+                untilDestroyed(this),
+            )
+            .subscribe();
+    }
+
+    protected onAddToList(guid: TestPlanElement<Scenario>['guid']): void {
+      const httpSampler: TestPlanElement<HttpSampler> = {
+          guid: v4(),
+          type: TEST_PLAN_TYPES.HttpSampler,
+          data: {
+              domain: 'www.default.com',
+              method: HTTP_METHODS.Get,
+              endpoint: '/'
+          }
+      };
+      this.selectedScenarioDataService.addScenarioElement(guid, httpSampler)
+            .subscribe();
+    }
+
+    protected saveEditedElements(): void {
+        const selectedScenario = this.selectedScenarioDataService.selectedScenario$.getValue();
+        if (!selectedScenario) return;
+        this.selectedScenarioDataService.updateScenarioElements(selectedScenario.guid, this.editedHttpSamplersDataService.editedHttpSamplers)
+            .subscribe(() => this.editedHttpSamplersDataService.editedHttpSamplers$.next(undefined));
+    }
+
+  public ngOnInit(): void {
+    this.subOnSelectedScenarioReassign();
+    this.subOnSelectedScenarioElements();
+  }
 }

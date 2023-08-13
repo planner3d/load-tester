@@ -105,7 +105,8 @@
               "browserTarget": "LoadTester:build:production"
             },
             "development": {
-              "browserTarget": "LoadTester:build:development"
+              "browserTarget": "LoadTester:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

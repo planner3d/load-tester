@@ -1,120 +1,41 @@
 import {Injectable} from '@angular/core';
-import {SelectedScenario} from "../data-access/selected-scenario.data.service";
-import {first, Observable, of} from "rxjs";
-import {HTTP_METHODS} from "../types/http-sampler";
-import {SAMPLER_TYPES} from "../types/sampler";
+import {first, Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+import {HttpSampler} from "../types/http-sampler";
+import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
+import {
+  AddTestPlanChildRequest,
+  TEST_PLAN_TYPES,
+  TestPlanElement,
+  UpdateTestPlanChildRequest
+} from "../../../core/types/test-plan";
+import {v4} from "uuid";
 
 @Injectable()
 export class SelectedScenarioApiService {
 
-  private serverData: SelectedScenario[] = [
-    {
-      guid: 'fjdjhf743747dh',
-      name: 'Тестовый сценарий 1',
-      samplerList: [
-        {
-          guid: '5454kfdjsdssd',
-          domain: 'www.google.com',
-          method: HTTP_METHODS.Get,
-          type: SAMPLER_TYPES.Http,
-          endpoint: '/',
-        },
-        {
-          guid: 'dsd43454dsds',
-          domain: 'www.yandex.ru',
-          method: HTTP_METHODS.Post,
-          type: SAMPLER_TYPES.Http,
-          endpoint: '/api/music'
-        },
-        {
-          guid: 'rfdf44534343',
-          destination: 'go/this/url',
-          type: SAMPLER_TYPES.Ftp,
-        },
-        {
-          guid: 'dsdsdxhy6666674',
-          domain: 'www.kahoot.com',
-          method: HTTP_METHODS.Get,
-          type: SAMPLER_TYPES.Http,
-          endpoint: '/'
-        }
-      ],
-    },
-    {
-      guid: '3434fdsddsdh',
-      name: 'Тестовый сценарий 2',
-      samplerList: [
-        {
-          guid: '5454kfdjsdssd',
-          domain: 'www.babam.com',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Get,
-          endpoint: '/',
-        },
-        {
-          guid: 'dsd43454dsds',
-          domain: 'www.yandex.kakaha',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Post,
-          endpoint: '/api/music'
-        },
-        {
-          guid: 'rfdf44534343',
-          domain: 'wewewe.amazon.com',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Put,
-          endpoint: '/remove'
-        },
-        {
-          guid: 'dsdsdxhy6666674',
-          domain: 'www.eeee.com',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Get,
-          endpoint: '/'
-        }
-      ],
-    },
-    {
-      guid: '9999sjkdjksjdqq',
-      name: 'Тестовый сценарий 3',
-      samplerList: [
-        {
-          guid: '5454kfdjsdssd',
-          domain: 'www.anatod.com',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Get,
-          endpoint: '/',
-        },
-        {
-          guid: 'dsd43454dsds',
-          domain: 'vdi.huy.ru',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Post,
-          endpoint: '/api/music'
-        },
-        {
-          guid: 'rfdf44534343',
-          domain: 'ddd.amazon.com',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Put,
-          endpoint: '/remove'
-        },
-        {
-          guid: 'dsdsdxhy6666674',
-          domain: 'www.gabar.com',
-          type: SAMPLER_TYPES.Http,
-          method: HTTP_METHODS.Get,
-          endpoint: '/'
-        }
-      ],
-    }
-  ]
-  constructor() { }
+  private baseUrl = environment.apiUrl;
 
-  public getSelectedScenario(guid: SelectedScenario['guid']): Observable<SelectedScenario | undefined> {
-    const selectedScenario = this.serverData.find(scenario => scenario.guid === guid);
-    return of(selectedScenario).pipe(
-        first(),
-    );
+  constructor(private http: HttpClient) { }
+
+  public getScenarioElementList(guid: TestPlanElement<Scenario>['guid']): Observable<TestPlanElement<HttpSampler>[]> {
+    return this.http.get<TestPlanElement<HttpSampler>[]>(`${this.baseUrl}/test-plan/element/children?parentGuid=${guid}`)
+        .pipe(first());
+  }
+
+  public addScenarioElement(parentGuid: TestPlanElement<Scenario>['guid'], elementToAdd: TestPlanElement<HttpSampler>): Observable<boolean> {
+    const requestBody: AddTestPlanChildRequest<HttpSampler> = {
+      parentGuid,
+      child: { ...elementToAdd }
+    }
+    return this.http.post<boolean>(`${this.baseUrl}/test-plan/element`, requestBody).pipe(
+        first()
+    )
+  }
+
+  public updateScenarioElements(editedElements: UpdateTestPlanChildRequest<HttpSampler>[]): Observable<boolean> {
+    return this.http.put<boolean>(`${this.baseUrl}/test-plan/elements`, editedElements)
+        .pipe(first());
   }
 }

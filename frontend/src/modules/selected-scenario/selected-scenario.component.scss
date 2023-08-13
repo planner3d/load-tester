@@ -18,6 +18,11 @@
   @include container.feature-container;
 }
 
+.scenario__header-container {
+  display: flex;
+  align-items: center;
+}
+
 :host ::ng-deep .scenario__elements {
   display: flex;
   flex-direction: column;
@@ -26,7 +31,16 @@
 
 .scenario__header {
   @include header.header;
+}
+
+.scenario__header-title {
   font-weight: 600;
+}
+
+.scenario__header-save-icon {
+  cursor: pointer;
+  margin-left: auto;
+  font-size: 1.25rem;
 }
 
 .scenario__http-left-panel {

@@ -1,7 +1,7 @@
 <div class="http-header" >
-    <div class="http-header__domain">{{ httpSampler?.domain }}</div>
+    <div class="http-header__domain">{{ httpSampler?.data?.domain }}</div>
     <div class="http-header__info">
-        <span class="http-header__method">{{ httpSampler?.method }}</span>
-        <span class="http-header__endpoint">{{ httpSampler?.endpoint }}</span>
+        <span class="http-header__method">{{ httpSampler?.data?.method }}</span>
+        <span class="http-header__endpoint">{{ httpSampler?.data?.endpoint }}</span>
     </div>
 </div>

@@ -1,37 +1,30 @@
 import { Injectable } from '@angular/core';
 import {Scenario} from "../data-access/scenario-list.data.service";
-import {first, Observable, of} from "rxjs";
+import {first, Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+import {AddTestPlanChildRequest, TestPlanElement} from "../../../core/types/test-plan";
 
 @Injectable()
 export class TestPlanApiService {
 
-  private scenarioList: Scenario[] = [
-    {
-      guid: 'fjdjhf743747dh',
-      title: 'Тестовый сценарий одын'
-    },
-    {
-      guid: '3434fdsddsdh',
-      title: 'Тестовый сценарий два'
-    },
-    {
-      guid: '9999sjkdjksjdqq',
-      title: 'Тестовый сценарий тры'
-    },
-  ];
+  private tesPlanGuid = 'cb43895e-a2f4-45c2-aea9-55ddb5c212ae';
+  private baseUrl = environment.apiUrl;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public getScenarioList(): Observable<Scenario[]> {
-    return of(this.scenarioList).pipe(
-        first()
-    );
+  public getScenarioList(): Observable<TestPlanElement<Scenario>[]> {
+    return this.http.get<TestPlanElement<Scenario>[]>(`${this.baseUrl}/test-plan/element/children?parentGuid=${this.tesPlanGuid}`)
+        .pipe(first());
   }
 
-  public addToScenarioList(scenario: Scenario): Observable<boolean> {
-    return new Observable<boolean>(observer => {
-      this.scenarioList.push(scenario);
-      observer.next(true);
-    })
+  public addToScenarioList(scenario: TestPlanElement<Scenario>): Observable<boolean> {
+    const requestBody: AddTestPlanChildRequest<Scenario> = {
+      parentGuid: this.tesPlanGuid,
+      child: { ...scenario }
+    }
+    return this.http.post<boolean>(`${this.baseUrl}/test-plan/element`, requestBody).pipe(
+        first()
+    )
   }
 }

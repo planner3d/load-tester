@@ -4,6 +4,7 @@ import {ButtonModule} from "primeng/button";
 import {TabViewModule} from "primeng/tabview";
 import {HttpBodyRequestComponent} from "../http-body-request/http-body-request.component";
 import {HttpSampler} from "../../types/http-sampler";
+import {TestPlanElement} from "../../../../core/types/test-plan";
 
 @Component({
   selector: 'app-http-body',
@@ -16,5 +17,5 @@ import {HttpSampler} from "../../types/http-sampler";
 export class HttpBodyComponent {
 
   @Input()
-  public httpSampler?: HttpSampler;
+  public httpSampler?: TestPlanElement<HttpSampler>;
 }

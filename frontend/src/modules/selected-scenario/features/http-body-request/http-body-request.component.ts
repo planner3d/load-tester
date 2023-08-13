@@ -6,7 +6,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_METHODS, HttpSampler} from "../../types/http-sampler";
 import {EditedHttpSamplersDataService} from "../../data-access/edited-http-samplers.data.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {SAMPLER_TYPES} from "../../types/sampler";
+import {TEST_PLAN_TYPES, TestPlanElement} from "../../../../core/types/test-plan";
 
 
 export interface HttpSamplerRequestForm {
@@ -30,7 +30,7 @@ export interface HttpMethodOption {
 export class HttpBodyRequestComponent implements OnInit {
 
   @Input()
-  public httpSampler?: HttpSampler;
+  public httpSampler?: TestPlanElement<HttpSampler>;
 
   protected httpSamplerRequestForm = new FormGroup<HttpSamplerRequestForm>({
     method: new FormControl<HTTP_METHODS | null>(null),
@@ -52,16 +52,22 @@ export class HttpBodyRequestComponent implements OnInit {
     },
   ];
 
-  constructor(private editedSamplersDataService: EditedHttpSamplersDataService) {
+  constructor(
+      private editedSamplersDataService: EditedHttpSamplersDataService,
+  ) {
+  }
 
+  private setDefaultValues(): void {
+    const domain = this.httpSampler?.data?.domain ?? '';
+    const endpoint = this.httpSampler?.data?.endpoint ?? '/';
+    this.httpSamplerRequestForm.setValue({
+      method: this.httpSampler?.data?.method ?? null,
+      url: domain + endpoint,
+    }, {emitEvent: false});
   }
 
   public ngOnInit(): void {
-    if (!this.httpSampler || !this.httpSampler.domain || !this.httpSampler.endpoint) return;
-    this.httpSamplerRequestForm.setValue({
-      method: this.httpSampler.method ?? null,
-      url: this.httpSampler.domain + this.httpSampler.endpoint ?? null,
-    });
+    this.setDefaultValues();
 
     this.httpSamplerRequestForm.valueChanges
         .pipe(
@@ -69,17 +75,18 @@ export class HttpBodyRequestComponent implements OnInit {
         )
         .subscribe(httpSamplerChanges => {
           if (!this.httpSampler) return;
+          const slashIndex = httpSamplerChanges.url?.indexOf('/') ?? -1;
           this.editedSamplersDataService.patchEditedHttpSamplers({
             [this.httpSampler.guid]: {
               guid: this.httpSampler.guid,
-              method: httpSamplerChanges.method,
-              type: SAMPLER_TYPES.Http,
-              domain: httpSamplerChanges.url?.slice(0, httpSamplerChanges.url?.indexOf('/')),
-              endpoint: httpSamplerChanges.url?.slice(httpSamplerChanges.url?.indexOf('/')+1),
+              type: TEST_PLAN_TYPES.HttpSampler,
+              data: {
+                method: httpSamplerChanges.method,
+                domain: slashIndex !== -1 ? httpSamplerChanges.url?.slice(0, slashIndex) :  httpSamplerChanges.url,
+                endpoint: slashIndex !== -1 ? httpSamplerChanges.url?.slice(slashIndex) : '/',
+              }
             }
-          })
-          console.log(this.editedSamplersDataService.editedHttpSamplers$.getValue())
+          });
       });
   }
-
 }

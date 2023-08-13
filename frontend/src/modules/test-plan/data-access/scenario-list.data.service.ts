@@ -1,35 +1,37 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, filter, Observable, shareReplay, switchMap, tap} from "rxjs";
+import {BehaviorSubject, filter, finalize, Observable, shareReplay, Subject, switchMap, tap} from "rxjs";
 import {TestPlanApiService} from "../api/test-plan.api.service";
+import {TestPlanElement} from "../../../core/types/test-plan";
 
 export interface Scenario {
-   guid: string;
-   title: string;
+    name: string;
 }
 
 @Injectable()
 export class ScenarioListDataService {
 
-  private _scenarioList$ = new BehaviorSubject<Scenario[]>([]);
+    public loading$ = new BehaviorSubject<boolean>(false); // make singleton with interceptor?
+  private _scenarioList$ = new BehaviorSubject<TestPlanElement<Scenario>[]>([]);
   public scenarioList$ = this._scenarioList$.asObservable()
       .pipe(shareReplay());
   constructor(private testPlanApiService: TestPlanApiService) {
 
   }
 
-  public getScenarioList(): Observable<Scenario[]> {
+  public getScenarioList(): Observable<TestPlanElement<Scenario>[]> {
+      this.loading$.next(true);
       return this.testPlanApiService.getScenarioList()
           .pipe(
-              tap(scenarioList => this._scenarioList$.next(scenarioList))
+              tap(scenarioList => this._scenarioList$.next(scenarioList)),
+              finalize(() => this.loading$.next(false))
           );
   }
 
-  public addToScenarioList(scenario: Scenario): Observable<Scenario[]> {
+  public addToScenarioList(scenario: TestPlanElement<Scenario>): Observable<boolean> {
       return this.testPlanApiService.addToScenarioList(scenario)
           .pipe(
               filter(status => status),
-              switchMap(() => this.getScenarioList()),
-              tap(scenarioList => this._scenarioList$.next(scenarioList))
+              tap(scenarioList => this._scenarioList$.next([...this._scenarioList$.getValue(), scenario])),
           );
   }
 
