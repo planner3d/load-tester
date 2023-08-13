@@ -13,15 +13,10 @@ import {TestPlanApiService} from "../../api/test-plan.api.service";
 })
 export class ResultTableModalComponent implements OnInit {
 
-  protected result: string[][] = [];
+    protected testPlan$ = this.testPlanApiService.runTestPlan();
 
-  constructor(protected testPlanApiService: TestPlanApiService, private changeDetector: ChangeDetectorRef) {}
+  constructor(protected testPlanApiService: TestPlanApiService) {}
 
   public ngOnInit(): void {
-    this.testPlanApiService.runTestPlan()
-        .subscribe(res => {
-          this.result = res;
-          this.changeDetector.detectChanges();
-        });
   }
 }

@@ -1,20 +1,23 @@
-<p-table
-    [scrollable]="true"
-    [columns]="result[0]"
-    [value]="result.slice(1)"
->
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns">
-                {{ col }}
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns; let i = index">
-                {{ rowData[i] }}
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+<ng-container *ngIf="testPlan$ | async as testPlanResult">
+    <p-table
+            [scrollable]="true"
+            [columns]="testPlanResult[0]"
+            [value]="testPlanResult.slice(1)"
+    >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns; let i = index">
+                    {{ rowData[i] }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</ng-container>
+

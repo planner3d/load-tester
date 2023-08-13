@@ -33,8 +33,6 @@ export class TestPlanApiService {
     return this.http.get<string[][]>(`${this.baseUrl}/test-plan/result?guid=${this.tesPlanGuid}`)
         .pipe(
             first(),
-            filter(isDefined),
-            filter(result => !!result.length),
         );
   }
 }
