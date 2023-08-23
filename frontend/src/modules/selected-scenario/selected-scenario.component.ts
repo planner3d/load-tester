@@ -17,12 +17,14 @@ import {AddToListBtnComponent} from "../../shared/add-to-list-btn/add-to-list-bt
 import {TEST_PLAN_TYPES, TestPlanElement} from "../../core/types/test-plan";
 import {HTTP_METHODS, HttpSampler} from "./types/http-sampler";
 import {v4} from "uuid";
+import {TreeModule} from "primeng/tree";
+import {ScenarioListFacadeService} from "../test-plan/facade/scenario-list.facade.service";
 
 @UntilDestroy()
 @Component({
   selector: 'app-selected-scenario',
   standalone: true,
-    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent, ProgressSpinnerModule, AddToListBtnComponent],
+    imports: [CommonModule, ScenarioListComponent, HttpHeaderComponent, HttpBodyComponent, AccordionModule, DragDropModule, ErrorComponent, ProgressSpinnerModule, AddToListBtnComponent, TreeModule],
   providers: [
       EditedHttpSamplersDataService,
   ],
@@ -34,7 +36,7 @@ export class SelectedScenarioComponent implements OnInit {
 
   constructor(
       protected selectedScenarioDataService: SelectedScenarioDataService,
-      protected scenarioListDataService: ScenarioListDataService,
+      protected scenarioListFacadeService: ScenarioListFacadeService,
       protected editedHttpSamplersDataService: EditedHttpSamplersDataService,
       private route: ActivatedRoute,
   ) {}
@@ -43,7 +45,7 @@ export class SelectedScenarioComponent implements OnInit {
         this.selectedScenarioDataService.selectedScenario$
             .pipe(
                 filter(selectedScenario => !selectedScenario),
-                switchMap(() => this.scenarioListDataService.getScenarioList()),
+                switchMap(() => this.scenarioListFacadeService.loadScenarioList()),
                 withLatestFrom(this.route.params),
                 filter(([list, params]) => params['id']),
                 map(([scenarioList, params]) => scenarioList.find(scenario => scenario.guid === params['id'])),

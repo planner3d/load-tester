@@ -10,7 +10,6 @@ import {
   TestPlanElement,
   UpdateTestPlanChildRequest
 } from "../../../core/types/test-plan";
-import {v4} from "uuid";
 
 @Injectable()
 export class SelectedScenarioApiService {

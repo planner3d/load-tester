@@ -7,6 +7,7 @@ import {AddToListBtnComponent} from "../../../../shared/add-to-list-btn/add-to-l
 import {v4 as uuidv4} from 'uuid';
 import {SelectedScenarioDataService} from "../../../selected-scenario/data-access/selected-scenario.data.service";
 import {TEST_PLAN_TYPES, TestPlanElement} from "../../../../core/types/test-plan";
+import {ScenarioListFacadeService} from "../../facade/scenario-list.facade.service";
 
 @UntilDestroy()
 @Component({
@@ -20,7 +21,7 @@ import {TEST_PLAN_TYPES, TestPlanElement} from "../../../../core/types/test-plan
 export class ScenarioListComponent implements OnInit {
 
   constructor(
-      protected scenarioListDataService: ScenarioListDataService,
+      protected scenarioListFacade: ScenarioListFacadeService,
       protected selectedScenarioDataService: SelectedScenarioDataService,
       private router: Router,
       private activatedRoute: ActivatedRoute,
@@ -28,7 +29,7 @@ export class ScenarioListComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.scenarioListDataService.getScenarioList()
+    this.scenarioListFacade.loadScenarioList()
         .pipe(
             untilDestroyed(this),
         )
@@ -36,7 +37,7 @@ export class ScenarioListComponent implements OnInit {
   }
 
   protected onAddToList(): void {
-     this.scenarioListDataService.addToScenarioList({ guid: uuidv4(),
+     this.scenarioListFacade.addToScenarioList({ guid: uuidv4(),
          type: TEST_PLAN_TYPES.ThreadGroup,
          data: {
             name: 'Тестовый сценарий'

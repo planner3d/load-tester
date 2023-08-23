@@ -5,7 +5,6 @@ import {SelectedScenarioApiService} from "../api/selected-scenario.api.service";
 import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
 import {TestPlanElement, UpdateTestPlanChildRequest} from "../../../core/types/test-plan";
 import {EditedHttpSamplers} from "./edited-http-samplers.data.service";
-import {isDefined} from "../../../core/utils/is-defined";
 
 @Injectable()
 export class SelectedScenarioDataService {

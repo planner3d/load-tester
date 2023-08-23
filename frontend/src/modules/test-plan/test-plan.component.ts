@@ -11,6 +11,7 @@ import {ScenarioListDataService} from "./data-access/scenario-list.data.service"
 import {SelectedScenarioDataService} from "../selected-scenario/data-access/selected-scenario.data.service";
 import {SelectedScenarioApiService} from "../selected-scenario/api/selected-scenario.api.service";
 import {DialogService} from "primeng/dynamicdialog";
+import {ScenarioListFacadeService} from "./facade/scenario-list.facade.service";
 
 @Component({
   selector: 'app-test-plan',
@@ -27,6 +28,7 @@ import {DialogService} from "primeng/dynamicdialog";
     ],
   providers: [
       ScenarioListDataService,
+      ScenarioListFacadeService,
       SelectedScenarioDataService,
       SelectedScenarioApiService,
       TestPlanApiService,
