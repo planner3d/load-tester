@@ -2,12 +2,12 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {Scenario} from "../../data-access/scenario-list.data.service";
-import {AddToListBtnComponent} from "../../../../shared/add-to-list-btn/add-to-list-btn.component";
-import {v4 as uuidv4} from 'uuid';
-import {TEST_PLAN_TYPES, TestPlanElement} from "../../../../core/types/test-plan";
-import {ScenarioListFacadeService} from "../../facade/scenario-list.facade.service";
-import {SelectedScenarioFacadeService} from "../../../selected-scenario/facade/selected-scenario.facade.service";
+import {AddToListBtnComponent} from "../../shared/add-to-list-btn/add-to-list-btn.component";
+import {ScenarioListFacadeService} from "./scenario-list.facade.service";
+import {SelectedScenarioFacadeService} from "../selected-scenario/facade/selected-scenario.facade.service";
+import {TEST_PLAN_TYPES, TestPlanElement} from "../../core/types/test-plan";
+import {v4} from "uuid";
+import {Scenario} from "./data-access/scenario-list.data.service";
 
 @UntilDestroy()
 @Component({
@@ -25,7 +25,7 @@ export class ScenarioListComponent implements OnInit {
       protected selectedScenarioFacade: SelectedScenarioFacadeService,
       private router: Router,
       private activatedRoute: ActivatedRoute,
-      ) {
+  ) {
   }
 
   public ngOnInit() {
@@ -37,15 +37,15 @@ export class ScenarioListComponent implements OnInit {
   }
 
   protected onAddToList(): void {
-     this.scenarioListFacade.addToScenarioList({ guid: uuidv4(),
-         type: TEST_PLAN_TYPES.ThreadGroup,
-         data: {
-            name: 'Тестовый сценарий'
-         }})
-         .pipe(
-             untilDestroyed(this),
-         )
-         .subscribe();
+    this.scenarioListFacade.addToScenarioList({ guid: v4(),
+      type: TEST_PLAN_TYPES.ThreadGroup,
+      data: {
+        name: 'Тестовый сценарий'
+      }})
+        .pipe(
+            untilDestroyed(this),
+        )
+        .subscribe();
   }
 
   protected selectScenario(selectedScenario: TestPlanElement<Scenario>): void {

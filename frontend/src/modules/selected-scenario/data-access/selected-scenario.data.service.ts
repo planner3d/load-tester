@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpSampler} from "../types/http-sampler";
-import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
+import {Scenario} from "../../scenario-list/data-access/scenario-list.data.service";
 import {TestPlanElement} from "../../../core/types/test-plan";
 
 @Injectable()

@@ -9,16 +9,16 @@ import {filter, first, map, switchMap, withLatestFrom} from "rxjs";
 import {DragDropModule} from "primeng/dragdrop";
 import {ErrorComponent} from "../../core/components/error/error.component";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {ScenarioListComponent} from "../test-plan/features/scenario-list/scenario-list.component";
-import {Scenario} from "../test-plan/data-access/scenario-list.data.service";
+import {Scenario} from "../scenario-list/data-access/scenario-list.data.service";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {AddToListBtnComponent} from "../../shared/add-to-list-btn/add-to-list-btn.component";
 import {TEST_PLAN_TYPES, TestPlanElement} from "../../core/types/test-plan";
 import {HTTP_METHODS, HttpSampler} from "./types/http-sampler";
 import {v4} from "uuid";
 import {TreeModule} from "primeng/tree";
-import {ScenarioListFacadeService} from "../test-plan/facade/scenario-list.facade.service";
+import {ScenarioListFacadeService} from "../scenario-list/scenario-list.facade.service";
 import {SelectedScenarioFacadeService} from "./facade/selected-scenario.facade.service";
+import {ScenarioListComponent} from "../scenario-list/scenario-list.component";
 
 @UntilDestroy()
 @Component({

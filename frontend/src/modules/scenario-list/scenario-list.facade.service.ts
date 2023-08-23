@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {filter, finalize, Observable, tap} from "rxjs";
-import {TestPlanElement} from "../../../core/types/test-plan";
-import {Scenario, ScenarioListDataService} from "../data-access/scenario-list.data.service";
-import {TestPlanApiService} from "../api/test-plan.api.service";
+import {TestPlanElement} from "../../core/types/test-plan";
+import {Scenario, ScenarioListDataService} from "./data-access/scenario-list.data.service";
+import {ScenarioListApiService} from "./api/scenario-list.api.service";
 
 @Injectable()
 export class ScenarioListFacadeService {
 
   constructor(
       private scenarioListDataService: ScenarioListDataService,
-      private testPlanApiService: TestPlanApiService,
+      private scenarioListApiService: ScenarioListApiService,
   ) { }
 
   public get scenarioList$(): Observable<TestPlanElement<Scenario>[]> {
@@ -22,7 +22,7 @@ export class ScenarioListFacadeService {
 
   public loadScenarioList(): Observable<TestPlanElement<Scenario>[]> {
     this.scenarioListDataService.loading$.next(true);
-    return this.testPlanApiService.getScenarioList()
+    return this.scenarioListApiService.getScenarioList()
         .pipe(
             tap(scenarioList => this.scenarioListDataService.setScenarioList(scenarioList)),
             finalize(() => this.scenarioListDataService.loading$.next(false))
@@ -30,7 +30,7 @@ export class ScenarioListFacadeService {
   }
 
   public addToScenarioList(scenario: TestPlanElement<Scenario>): Observable<boolean> {
-    return this.testPlanApiService.addToScenarioList(scenario)
+    return this.scenarioListApiService.addToScenarioList(scenario)
         .pipe(
             filter(status => status),
             tap(() => this.scenarioListDataService.addScenarioListElement(scenario)),

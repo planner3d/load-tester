@@ -87,6 +87,7 @@ export class HttpBodyRequestComponent implements OnInit {
               }
             }
           });
+          console.log(this.editedSamplersDataService.editedHttpSamplers)
       });
   }
 }

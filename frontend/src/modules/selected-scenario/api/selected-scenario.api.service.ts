@@ -3,15 +3,14 @@ import {first, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {HttpSampler} from "../types/http-sampler";
-import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
+import {Scenario} from "../../scenario-list/data-access/scenario-list.data.service";
 import {
   AddTestPlanChildRequest,
-  TEST_PLAN_TYPES,
   TestPlanElement,
   UpdateTestPlanChildRequest
 } from "../../../core/types/test-plan";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class SelectedScenarioApiService {
 
   private baseUrl = environment.apiUrl;

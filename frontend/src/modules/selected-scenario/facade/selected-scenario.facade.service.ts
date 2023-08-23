@@ -1,6 +1,6 @@
 import {Injectable, Optional} from '@angular/core';
 import {TestPlanElement, UpdateTestPlanChildRequest} from "../../../core/types/test-plan";
-import {Scenario} from "../../test-plan/data-access/scenario-list.data.service";
+import {Scenario} from "../../scenario-list/data-access/scenario-list.data.service";
 import {EMPTY, filter, finalize, map, Observable, of, switchMap, tap} from "rxjs";
 import {HttpSampler} from "../types/http-sampler";
 import {SelectedScenarioDataService} from "../data-access/selected-scenario.data.service";

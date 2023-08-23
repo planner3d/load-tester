@@ -1,10 +1,10 @@
 <ng-container *ngIf="scenarioListFacade.scenarioList$ | async as scenarioList">
     <ul *ngIf="scenarioList.length" class="scenario-list">
         <li
-            *ngFor="let scenario of scenarioList"
-            class="scenario-list-item"
-            [class.scenario-list-item--selected]="(selectedScenarioFacade.selectedScenario$ | async)?.guid === scenario.guid"
-            (click)="selectScenario(scenario)"
+                *ngFor="let scenario of scenarioList"
+                class="scenario-list-item"
+                [class.scenario-list-item--selected]="(selectedScenarioFacade.selectedScenario$ | async)?.guid === scenario.guid"
+                (click)="selectScenario(scenario)"
         >
             <span>{{ scenario.data?.name }}</span>
             <div>
