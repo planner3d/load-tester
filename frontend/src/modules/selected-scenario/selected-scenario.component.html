@@ -1,5 +1,5 @@
-<ng-container *ngIf="!(selectedScenarioDataService.loading$ | async); else loading">
-    <div *ngIf="selectedScenarioDataService.selectedScenario$ | async as selectedScenario; else empty" class="scenario">
+<ng-container *ngIf="!(selectedScenarioFacade.loading$ | async); else loading">
+    <div *ngIf="selectedScenarioFacade.selectedScenario$ | async as selectedScenario; else empty" class="scenario">
         <header class="scenario__header">
             <div class="container scenario__header-container">
                 <span class="scenario__header-title">{{ selectedScenario.data?.name }}</span>
@@ -12,10 +12,19 @@
         </header>
         <main class="scenario__body">
             <div class="container">
-                <ng-container *ngIf="!(scenarioListFacadeService.loading$ | async); else loading">
-                    <ng-container *ngIf="selectedScenarioDataService.scenarioElementList$ | async as scenarioElementList">
-                        <p-tree class="w-full md:w-30rem" [value]="scenarioElementList"></p-tree>
-                    </ng-container>
+                <ng-container *ngIf="!(scenarioListFacade.loading$ | async); else loading">
+                    <p-accordion *ngIf="selectedScenarioFacade.scenarioElementList$ | async as scenarioElementList" styleClass="scenario__elements">
+                        <p-accordionTab
+                                *ngFor="let sampler of scenarioElementList"
+                        >
+                            <ng-template pTemplate="header">
+                                <app-http-header [httpSampler]="sampler"></app-http-header>
+                            </ng-template>
+                            <ng-template pTemplate="content">
+                                <app-http-body [httpSampler]="sampler"></app-http-body>
+                            </ng-template>
+                        </p-accordionTab>
+                    </p-accordion>
                 </ng-container>
                 <app-add-to-list-btn
                         (addToList)="onAddToList(selectedScenario.guid)"

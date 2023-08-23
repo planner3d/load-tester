@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, filter, finalize, Observable, shareReplay, tap} from "rxjs";
-import {TestPlanApiService} from "../api/test-plan.api.service";
+import {BehaviorSubject, shareReplay} from "rxjs";
 import {TestPlanElement} from "../../../core/types/test-plan";
 
 export interface Scenario {

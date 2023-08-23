@@ -3,7 +3,7 @@
         <li
             *ngFor="let scenario of scenarioList"
             class="scenario-list-item"
-            [class.scenario-list-item--selected]="(selectedScenarioDataService.selectedScenario$ | async)?.guid === scenario.guid"
+            [class.scenario-list-item--selected]="(selectedScenarioFacade.selectedScenario$ | async)?.guid === scenario.guid"
             (click)="selectScenario(scenario)"
         >
             <span>{{ scenario.data?.name }}</span>

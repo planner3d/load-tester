@@ -2,12 +2,12 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {Scenario, ScenarioListDataService} from "../../data-access/scenario-list.data.service";
+import {Scenario} from "../../data-access/scenario-list.data.service";
 import {AddToListBtnComponent} from "../../../../shared/add-to-list-btn/add-to-list-btn.component";
 import {v4 as uuidv4} from 'uuid';
-import {SelectedScenarioDataService} from "../../../selected-scenario/data-access/selected-scenario.data.service";
 import {TEST_PLAN_TYPES, TestPlanElement} from "../../../../core/types/test-plan";
 import {ScenarioListFacadeService} from "../../facade/scenario-list.facade.service";
+import {SelectedScenarioFacadeService} from "../../../selected-scenario/facade/selected-scenario.facade.service";
 
 @UntilDestroy()
 @Component({
@@ -22,7 +22,7 @@ export class ScenarioListComponent implements OnInit {
 
   constructor(
       protected scenarioListFacade: ScenarioListFacadeService,
-      protected selectedScenarioDataService: SelectedScenarioDataService,
+      protected selectedScenarioFacade: SelectedScenarioFacadeService,
       private router: Router,
       private activatedRoute: ActivatedRoute,
       ) {
@@ -48,8 +48,8 @@ export class ScenarioListComponent implements OnInit {
          .subscribe();
   }
 
-  protected selectScenario(selectedScenario: TestPlanElement<Scenario>) {
-    this.selectedScenarioDataService.selectedScenario$.next(selectedScenario);
+  protected selectScenario(selectedScenario: TestPlanElement<Scenario>): void {
+    this.selectedScenarioFacade.setSelectedScenario(selectedScenario);
     this.router.navigate(['selected-scenario', selectedScenario.guid], {relativeTo: this.activatedRoute});
   }
 }

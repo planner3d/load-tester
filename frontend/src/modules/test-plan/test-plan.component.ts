@@ -12,6 +12,8 @@ import {SelectedScenarioDataService} from "../selected-scenario/data-access/sele
 import {SelectedScenarioApiService} from "../selected-scenario/api/selected-scenario.api.service";
 import {DialogService} from "primeng/dynamicdialog";
 import {ScenarioListFacadeService} from "./facade/scenario-list.facade.service";
+import {SelectedScenarioFacadeService} from "../selected-scenario/facade/selected-scenario.facade.service";
+import {EditedHttpSamplersDataService} from "../selected-scenario/data-access/edited-http-samplers.data.service";
 
 @Component({
   selector: 'app-test-plan',
@@ -31,6 +33,7 @@ import {ScenarioListFacadeService} from "./facade/scenario-list.facade.service";
       ScenarioListFacadeService,
       SelectedScenarioDataService,
       SelectedScenarioApiService,
+      SelectedScenarioFacadeService,
       TestPlanApiService,
       DialogService
   ],
