@@ -99,9 +99,9 @@ public class TestPlanService implements LTTestPlan {
 	
 	@Override
 	public List<String[]> startTestPlan(Map<String, String> testPlanGuid) {
-		Deque<HashTree> parentHashTreeQueue = addTestPlanInHashTree(testPlanGuid.get(JsonFieldModel.GUID));
+		Deque<HashTree> parentHashTreeQueue = addTestPlanInHashTree(testPlanGuid.get(JsonFieldModel.TEST_PLAN_GUID));
 		addTestPlanElementInHashTree(
-				testPlanDAO.findChildrenByParentGuid(testPlanGuid.get(JsonFieldModel.GUID)), 
+				testPlanDAO.findChildrenByParentGuid(testPlanGuid.get(JsonFieldModel.TEST_PLAN_GUID)), 
 				parentHashTreeQueue
 			);
 		runTest();
