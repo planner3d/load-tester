@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ErrorComponent} from "../../../../core/components/error/error.component";
-import {ScenarioListDataService} from "../../data-access/scenario-list.data.service";
+import {ScenarioListDataService} from "../../../scenario-list/data-access/scenario-list.data.service";
 
 @Component({
   selector: 'app-nothing-selected',
