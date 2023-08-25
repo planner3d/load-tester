@@ -61,9 +61,14 @@ public class TestPlanService implements LTTestPlan {
 	}
 
 	@Override
-	public List<Document> findChildrenByParentGuid(String parentGuid) {
-		return testPlanDAO
+	public Document findParentAndChildrenByParentGuid(String parentGuid) {
+		Document parent = testPlanDAO.findParentByParentGuid(parentGuid);
+		List<Document> children = testPlanDAO
 				.findChildrenByParentGuid(parentGuid);
+		for (Document child : children) {
+			child.put(JsonFieldModel.PARENT_GUID, parentGuid);
+		}
+		return parent.append(JsonFieldModel.CHILDREN, children);
 	}
 	
 	@Override

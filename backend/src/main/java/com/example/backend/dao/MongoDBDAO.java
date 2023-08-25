@@ -38,6 +38,17 @@ public class MongoDBDAO implements TestPlanDAO {
 				.upsert(query, update, DEFAULT_COLLECTION)
 				.wasAcknowledged();
 	}
+	
+	@Override
+	public Document findParentByParentGuid(String parentGuid) {
+		Query query = new Query(Criteria
+				.where(JsonFieldModel.GUID)
+				.is(parentGuid));
+		query.fields().exclude(JsonFieldModel.CHILDREN);
+		Document parent = mongoTemplate
+				.findOne(query, Document.class, DEFAULT_COLLECTION);
+		return parent;
+	}
 
 	@Override
 	public List<Document> findChildrenByParentGuid(String parentGuid) {
