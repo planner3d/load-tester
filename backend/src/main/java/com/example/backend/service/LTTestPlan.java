@@ -13,7 +13,7 @@ public interface LTTestPlan {
 	
 	Boolean saveTestPlanElement(JsonNode testElement);
 	
-	List<Document> findChildrenByParentGuid(String parentGuid);
+	Document findParentAndChildrenByParentGuid(String parentGuid);
 	
 	Boolean updateThreadGroup(JsonNode threadGroup);
 	
